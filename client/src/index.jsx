@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Home from './components/Home.jsx';
+import Router from './components/Routing.jsx';
 import NavBar from './components/Navbar.jsx';
 
 class App extends React.Component {
@@ -8,7 +8,8 @@ class App extends React.Component {
     super(props); 
     this.state = {
       currentScreen: 'Home',
-      navScreens: ['Home', 'About', 'Accomodations', 'Join The Fun', 'Portal']
+      navScreens: ['Home', 'About', 'Accomodations', 'Join The Fun', 'Portal'],
+      navOpen: false
     }
     this.openNav = this.openNav.bind(this);
     this.closeNav = this.closeNav.bind(this);
@@ -21,22 +22,24 @@ class App extends React.Component {
 
   openNav() {
     document.getElementById("Nav").style.width = "25%";
+    this.setState({ navOpen: true });
   }
   
   closeNav() {
     document.getElementById("Nav").style.width = '0%';
+    this.setState({ navOpen: false });
   }
 
   changeScreen(e) {
-    console.log(e.target);
+    this.setState({ currentScreen : e.target.name });
   } 
 
   render() {
     return(
       <div id="application">
         <span onClick={this.openNav}>&#9776;</span>
-        <NavBar navScreens={this.state.navScreens} closeNav={this.closeNav} currentScreen={this.state.currentScreen} changeScreen={this.changeScreen}/>
-        <Home/>
+        <NavBar status={this.state.navOpen} navScreens={this.state.navScreens} closeNav={this.closeNav} currentScreen={this.state.currentScreen} changeScreen={this.changeScreen}/>
+        <Router currentScreen={this.state.currentScreen} />
       </div>
     )
   }
