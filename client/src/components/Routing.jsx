@@ -1,6 +1,9 @@
 import React from 'react';
 import Home from './Home.jsx';
 import About from './About.jsx';
+import Portal from './Portal.jsx';
+import JoinTheFun from './JoinTheFun.jsx';
+import Accomodations from './Accomodations.jsx';
 
 const Router = (props) => {
   let CS = props.currentScreen;
@@ -8,13 +11,13 @@ const Router = (props) => {
   if(CS === 'Home') {
     return <Home/>
   } else if (CS === 'About') {
-    return <div id="About" >About</div>
+    return <About/>
   } else if (CS === 'Accomodations') {
-    return <div id="Acc">Accomodations!!!!!!!!!!!!!!!!!!</div>
+    return <Accomodations/>
   } else if (CS === 'Join The Fun') {
-    return <div id="JTF" >Join The Fun</div>
+    return <JoinTheFun/>
   } else {
-    return <div id="Portal" >Portal</div>
+    return <Portal/>
   }
 }
 
