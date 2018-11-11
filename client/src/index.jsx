@@ -35,7 +35,7 @@ class App extends React.Component {
     return(
       <div id="application">
         <span onClick={this.openNav}>&#9776;</span>
-        <NavBar navScreens={this.navScreens} closeNav={this.closeNav} />
+        <NavBar navScreens={this.state.navScreens} closeNav={this.closeNav} currentScreen={this.state.currentScreen} changeScreen={this.changeScreen}/>
         <Home/>
       </div>
     )
