@@ -38,6 +38,7 @@ const SignUp = (props) => (
       </Col>
       
     </Row>
+    { props.error[1].length && props.error[0] === 'signUp' ? props.error : null }
     <Button outline color="secondary" block name="signUp" onClick={props.submit} >Sign Up</Button>
   </div>
 );

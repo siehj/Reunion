@@ -17,7 +17,7 @@ const Router = (props) => {
   } else if (CS === 'Join The Fun') {
     return <JoinTheFun/>
   } else {
-    return <Portal loggedIn={props.loggedIn} login={props.login} signUp={props.signUp} />
+    return <Portal loggedIn={props.loggedIn} login={props.login} signUp={props.signUp} error={props.error} />
   }
 }
 

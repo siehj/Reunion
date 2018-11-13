@@ -10,8 +10,6 @@ class Portal extends React.Component {
     super(props);
     this.state = {
       loggedIn: props.loggedIn,
-      error: false,
-      errMsg: '',
       username: '', 
       password: '', 
       firstName: '', 
@@ -42,8 +40,8 @@ class Portal extends React.Component {
       {
         this.state.loggedIn ? <UserPortal /> :
         <div>
-          <Login update={this.updateData} submit={this.submit} />
-          <SignUp update={this.updateData} submit={this.submit} />
+          <Login update={this.updateData} submit={this.submit} error={this.props.error} />
+          <SignUp update={this.updateData} submit={this.submit} error={this.props.error} />
         </div>
       }
     </div>

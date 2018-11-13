@@ -12,7 +12,8 @@ class App extends React.Component {
       currentScreen: 'Home',
       navScreens: ['Home', 'About', 'Accomodations', 'Join The Fun', 'Portal'],
       navOpen: false,
-      loggedIn: false
+      loggedIn: false,
+      error: ['', ''],
     }
     this.openNav = this.openNav.bind(this);
     this.closeNav = this.closeNav.bind(this);
@@ -66,6 +67,7 @@ class App extends React.Component {
           loggedIn={this.state.loggedIn}
           login={this.login}
           signUp={this.signUp}
+          error={this.state.error}
         />
       </div>
     )
