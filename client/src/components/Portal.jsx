@@ -1,13 +1,15 @@
 import React from 'react';
 import Login from './NestedComponents/Login.jsx';
 import SignUp from './NestedComponents/SignUp.jsx';
+import UserPortal from './NestedComponents/UserPortal.jsx';
+
 // import { Form, Input, FormGroup, Row, Col, Label, Button } from 'reactstrap';
 
 class Portal extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false,
+      loggedIn: props.loggedIn,
       error: false,
       errMsg: '',
       username: '', 
@@ -38,7 +40,7 @@ class Portal extends React.Component {
     return (
     <div id="Portal" >
       {
-        this.state.loggedIn ? null :
+        this.state.loggedIn ? <UserPortal /> :
         <div>
           <Login update={this.updateData} submit={this.submit} />
           <SignUp update={this.updateData} submit={this.submit} />
