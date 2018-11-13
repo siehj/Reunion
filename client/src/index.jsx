@@ -41,13 +41,15 @@ class App extends React.Component {
   } 
 
   login(user) {
-    axios.post('/api/login', user)
-      .then(result => console.log('login result: ', result));
+    this.setState({ loggedIn: true })
+    // axios.post('/api/login', user)
+    //   .then(result => console.log('login result: ', result));
   }
 
   signUp(user) {
-    axios.post('/api/signUp', user)
-      .then(result => console.log('signup result: ', result))
+    this.setState({ loggedIn: true })
+    // axios.post('/api/signUp', user)
+    //   .then(result => console.log('signup result: ', result))
   }
 
   render() {
