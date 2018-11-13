@@ -1,4 +1,5 @@
 import React from 'react';
+import { Button } from 'reactstrap'
 
 const NavBar = (props) => (
   <div id="Nav">
@@ -14,6 +15,9 @@ const NavBar = (props) => (
           } 
         }
       )}
+      { props.loggedIn ? 
+        <Button outline color="info" block >Log Out</Button>
+        : null }
     </div> 
       : null
     }
