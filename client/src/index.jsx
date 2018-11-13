@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Router from './components/Routing.jsx';
 import NavBar from './components/Navbar.jsx';
+const axios = require('axios');
+
 
 class App extends React.Component {
   constructor(props) {
@@ -9,11 +11,14 @@ class App extends React.Component {
     this.state = {
       currentScreen: 'Home',
       navScreens: ['Home', 'About', 'Accomodations', 'Join The Fun', 'Portal'],
-      navOpen: false
+      navOpen: false,
+      loggedIn: false
     }
     this.openNav = this.openNav.bind(this);
     this.closeNav = this.closeNav.bind(this);
     this.changeScreen = this.changeScreen.bind(this);
+    this.login = this.login.bind(this);
+    this.signUp = this.signUp.bind(this);
   }
 
   componentDidMount() {
@@ -34,12 +39,34 @@ class App extends React.Component {
     this.setState({ currentScreen : e.target.name });
   } 
 
+  login(user) {
+    axios.post('/api/login', user)
+      .then(result => console.log('login result: ', result));
+  }
+
+  signUp(user) {
+    axios.post('/api/signUp', user)
+      .then(result => console.log('signup result: ', result))
+  }
+
   render() {
     return(
       <div id="application">
         <span onClick={this.openNav}>&#9776;</span>
-        <NavBar status={this.state.navOpen} navScreens={this.state.navScreens} closeNav={this.closeNav} currentScreen={this.state.currentScreen} changeScreen={this.changeScreen}/>
-        <Router currentScreen={this.state.currentScreen} />
+        <NavBar 
+          status={this.state.navOpen} 
+          navScreens={this.state.navScreens} 
+          closeNav={this.closeNav} 
+          currentScreen={this.state.currentScreen} 
+          changeScreen={this.changeScreen}
+          loggedIn={this.state.loggedIn}
+        />
+        <Router 
+          currentScreen={this.state.currentScreen}
+          loggedIn={this.state.loggedIn}
+          login={this.login}
+          signUp={this.signUp}
+        />
       </div>
     )
   }
