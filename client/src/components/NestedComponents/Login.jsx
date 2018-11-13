@@ -3,7 +3,7 @@ import { Form, Input, FormGroup, Row, Col, Label, Button } from 'reactstrap';
 
 
 const Login = (props) => (
-  <div>
+  <div id="login">
     <Row>
       <Col className="text-center" >
         <h3>Login</h3>
@@ -13,17 +13,17 @@ const Login = (props) => (
       <Col > 
         <FormGroup>
           <Label>Username</Label>
-          <Input type="text" ></Input>
+          <Input type="text" name="username" title="login" onChange={props.update} />
         </FormGroup>
       </Col>
       <Col >
         <FormGroup>
           <Label>Password</Label>
-          <Input type="password" ></Input>
+          <Input type="password" name="password" title="login" onChange={props.update}  />
         </FormGroup>
       </Col>
       <Col>
-        <Button outline color="secondary" block style={{ marginTop: '32px' }} >Login</Button>
+        <Button outline color="secondary" block style={{ marginTop: '32px' }} name="login" onClick={props.submit} >Login</Button>
       </Col>
     </Row>
   </div>
