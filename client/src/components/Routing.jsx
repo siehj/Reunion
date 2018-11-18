@@ -4,6 +4,7 @@ import About from './About.jsx';
 import Portal from './Portal.jsx';
 import JoinTheFun from './JoinTheFun.jsx';
 import Accomodations from './Accomodations.jsx';
+import Chat from './NestedComponents/Chat.jsx';
 
 const Router = (props) => {
   let CS = props.currentScreen;
@@ -11,13 +12,33 @@ const Router = (props) => {
   if(CS === 'Home') {
     return <Home/>
   } else if (CS === 'About') {
-    return <About/>
+    return (
+    <div>
+      <About/>
+      <Chat open={props.chatOpen} loggedIn={props.loggedIn}  />  
+    </div> 
+      )
   } else if (CS === 'Accomodations') {
-    return <Accomodations/>
+    return (
+    <div>
+      <Accomodations/>
+      <Chat open={props.chatOpen} loggedIn={props.loggedIn} />  
+    </div>
+      )
   } else if (CS === 'Join The Fun') {
-    return <JoinTheFun/>
+    return (
+      <div>
+        <JoinTheFun/>
+        <Chat open={props.chatOpen} loggedIn={props.loggedIn} />  
+      </div>
+    ) 
   } else {
-    return <Portal loggedIn={props.loggedIn} login={props.login} signUp={props.signUp} error={props.error} />
+    return (
+      <div>
+        <Portal loggedIn={props.loggedIn} login={props.login} signUp={props.signUp} error={props.error} />
+        <Chat open={props.chatOpen} loggedIn={props.loggedIn} />  
+      </div>
+    ) 
   }
 }
 

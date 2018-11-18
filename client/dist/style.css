@@ -129,3 +129,12 @@ span {
   position: absolute;
 }
 
+#Bubble {
+  right: 20px;
+  bottom: 20px;
+  position: absolute;
+  height: 45px;
+  width: 45px;
+  cursor: pointer;
+  z-index: 8;
+}
