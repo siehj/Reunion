@@ -43,7 +43,7 @@ html {
 
 #Nav h3 {
   font-size: 40px;
-  color: #818181;
+  color: #6c757d;
   margin-left: 20px;
   margin-top: 0px;
 }
@@ -71,7 +71,7 @@ html {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
-  color: #818181;
+  color: #6c757d;
   display: block;
   transition: 0.3s;
 }
@@ -79,7 +79,7 @@ a {
   padding: 8px 8px 8px 32px;
   text-decoration: none;
   font-size: 25px;
-  color: #818181;
+  color: #6c757d;
   display: block;
   transition: 0.3s;
 }
@@ -103,7 +103,7 @@ a {
 span {
   font-size: 30px;
   padding-left: 1%;
-  color: #818181;
+  color: #6c757d;
   cursor: pointer;
 }
 
@@ -113,7 +113,7 @@ span {
   margin-left: 28%;
   margin-right: 3%;
   /* width: 75%; */
-  color: #818181;
+  color: #6c757d;
 }
 
 #signUp {
@@ -124,5 +124,8 @@ span {
   margin-top: 2%;
 }
 
-
+#logoutBtn {
+  bottom: 20px;
+  position: absolute;
+}
 

@@ -16,7 +16,7 @@ const NavBar = (props) => (
         }
       )}
       { props.loggedIn ? 
-        <Button outline color="info" block >Log Out</Button>
+        <Button id="logoutBtn" outline color="secondary" block >Log Out</Button>
         : null }
     </div> 
       : null

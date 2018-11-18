@@ -9,10 +9,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post('/api/login', (req, res) => {
   console.log(req.body);
+  res.end();
 })
 
 app.post('/api/signUp', (req, res) => {
   console.log(req.body);
+  res.end();
 })
 
 const port = process.env.PORT || 3030;
