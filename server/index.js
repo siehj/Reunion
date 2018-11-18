@@ -10,12 +10,23 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.post('/api/login', (req, res) => {
-  console.log(req.body);
+  let username = req.body.username;
+  let password = req.body.password;
+  if ( !username.length || !password.length ) {
+    res.send(["login", "Either the username or password is missing"]);
+  }
+  // console.log(req.body);
   res.end();
 })
 
 app.post('/api/signUp', (req, res) => {
-  console.log(req.body);
+  let username = req.body.username;
+  let password = req.body.password;
+  if ( !username.length || !password.length ) {
+    console.log("error");
+    res.send(["signUp", "Either the username or password is missing"]);
+  }
+
   res.end();
 })
 
