@@ -1,10 +1,6 @@
-const mysql = require('mysql');
+const { Client } = require('pg');
 
-const con = mysql.createConnection({
-  host : process.env.DBHost,
-  user : process.env.DBUsername, 
-  password : process.env.DBPassword, 
-  database: process.env.DBName
-});
+const client = new Client(process.env.DB_Connection + '?ssl=true');
+client.connect();
 
 module.exports = {};
