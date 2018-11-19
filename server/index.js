@@ -17,36 +17,43 @@ app.post('/api/login', (req, res) => {
   let password = req.body.password;
   if ( !username.length || !password.length ) {
     res.send(["login", "Either the username or password is missing"]);
-  }
-  // else find the user in the db with username 
+  } else {
+   db.findUser(username, (err, result) => { err ? console.log('err', err) : console.log(result[0].exists) });
+    // else find the user in the db with username 
     //bcrypt.compare(password, pwfromDb (err, match) => {})
-
-      //req.session.loggedIn = true;
+    
+    //req.session.loggedIn = true;
+  }
   res.end();
 })
 
 app.post('/api/signUp', (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
+  let name = `${req.body.firstName} ${req.body.lastName}`;
+  
   if ( !username.length || !password.length ) {
     console.log("error");
     res.send(["signUp", "Either the username or password is missing"]);
-  }
-  bcrypt.genSalt(10, (err, salt) => {
-    if (err) {
-      console.log(err);
-    } else {
-      // check if username is taken in the db
-
-      //if found, 
+  } else {
+    bcrypt.genSalt(10, (err, salt) => {
+      if (err) {
+        console.log(err);
+      } else {
+        // check if username is taken in the db
+        // console.log(db.findUser())
+        //if found, 
         //send back error ["signUp", "Sorry, you cannot use this username"]
-
-      //else, 
+        
+        //else, 
+        let user = { username: username, password: salt, name: name };
+        console.log(user); 
         //place into the database
         //req.session.loggedIn = true;
-      res.end();
-    }
-  })
+        res.end();
+      }
+    })
+  }
   // res.end();
 })
 
