@@ -13,6 +13,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(sessions({secret: process.env.SECRET, resave: false, saveUninitialized: true }));
 
 app.post('/api/login', (req, res) => {
+  console.log('Heroku deployment test');
   let username = req.body.username;
   let password = req.body.password;
   if ( !username.length || !password.length ) {
@@ -23,6 +24,7 @@ app.post('/api/login', (req, res) => {
         if(!user) {
           res.send(["login", "Sorry, your login and or password are incorrect!"]);
         } else {
+          console.log('found user');
           return user;
         }
       })
@@ -33,6 +35,7 @@ app.post('/api/login', (req, res) => {
           } else {
             // req.session.loggedIn = true;
             let userInfo = { name: user.name.split(' ')[0], email: user.email, phone: user.phone, vote: user.vote };
+            console.log(`user info ${userInfo}`)
             res.send(userInfo);                  
           }
         })
