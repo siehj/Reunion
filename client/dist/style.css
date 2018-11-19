@@ -133,9 +133,13 @@ span {
 #Bubble {
   right: 20px;
   bottom: 20px;
-  position: absolute;
+  position: fixed;
   height: 50px;
   width: 50px;
   cursor: pointer;
   z-index: 8;
+}
+
+section {
+  margin-bottom: 20px;
 }
