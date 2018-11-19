@@ -1,6 +1,4 @@
 
-USE FTdb;
-
 CREATE TABLE "users" (
   "id" SERIAL,
   "name" VARCHAR(30),
@@ -8,6 +6,8 @@ CREATE TABLE "users" (
   "password" VARCHAR(200),
   "email" VARCHAR(100),
   "phone" VARCHAR(20),
+  "city" VARCHAR(20),
+  "state" VARCHAR(2),
   "vote" INTEGER,
   "vote_id" INTEGER,
   PRIMARY KEY ("id")

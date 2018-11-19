@@ -26,7 +26,7 @@ const Login = (props) => (
         <Button outline color="secondary" block style={{ marginTop: '32px' }} name="login" onClick={props.submit} >Login</Button>
       </Col>
     </Row>
-    { props.error[1].length && props.error[0] === 'login' ? <em style={{ color: "red" }}>{props.error[1]}</em> : null }
+    { props.error[1].length && props.error[0] === 'login' ? <em style={{ color: "yellow" }}>{props.error[1]}</em> : null }
   </div>
 );
 

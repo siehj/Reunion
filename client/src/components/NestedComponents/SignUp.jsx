@@ -37,7 +37,7 @@ const SignUp = (props) => (
         </FormGroup>
       </Col>
     </Row>
-    { props.error[1].length && props.error[0] === 'signUp' ?  <em style={{ color: "red" }}>{props.error[1]}</em> : null }
+    { props.error[1].length && props.error[0] === 'signUp' ?  <em style={{ color: "yellow" }}>{props.error[1]}</em> : null }
     <Button outline color="secondary" block name="signUp" onClick={props.submit} >Sign Up</Button>
   </div>
 );

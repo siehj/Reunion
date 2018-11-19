@@ -18,13 +18,33 @@ app.post('/api/login', (req, res) => {
   if ( !username.length || !password.length ) {
     res.send(["login", "Either the username or password is missing"]);
   } else {
-   db.findUser(username, (err, result) => { err ? console.log('err', err) : console.log(result[0].exists) });
-    // else find the user in the db with username 
-    //bcrypt.compare(password, pwfromDb (err, match) => {})
-    
-    //req.session.loggedIn = true;
+    db.findUser(username, (err, result) => { 
+      if (err) {
+        console.log('err', err) 
+      } else {
+        if(!result[0].exists) {
+          res.send(["login", "Sorry, your login and or password are incorrect!"]);
+        } else {
+          // else find the user in the db with username 
+          db.getUserInfo(username, (err, info) => {
+            if(err) console.log(err);
+            else {
+              bcrypt.compare(password, info[0].password, (err, match) => {
+                if (err || !match) {
+                  res.send(["login", "Sorry, your login and or password are incorrect!"]);
+                } else {
+                  req.session.loggedIn = true;
+                  let userInfo = { name: info[0].name.split(' ')[0], email: info[0].email, phone: info[0].phone, vote: info[0].vote };
+                  res.send(userInfo);                  
+                }
+              })
+            }
+          });
+        }
+      } 
+    });
   }
-  res.end();
+  // res.end();
 })
 
 app.post('/api/signUp', (req, res) => {
@@ -37,32 +57,34 @@ app.post('/api/signUp', (req, res) => {
     res.send(["signUp", "Either the username or password is missing"]);
   } else {
     bcrypt.genSalt(10, (err, salt) => {
-      if (err) {
-        console.log(err);
-      } else {
-        // check if username is taken in the db
-        db.findUser(username, (err, result) => {
-          if (err) console.log(`error finding user`);
-          else {
-            if (result[0].exists) {
-              res.send(["signUp", "Sorry, this username is already taken"]);
-            } else {
-              let user = { username: username, password: salt, name: name };
-              // console.log(user); 
-              //place into the database
-              db.addUser(user, (err, data) => {
-                if (err) console.log(err);
-                else {
-                  console.log(data);
-                  req.session.loggedIn = true;
-                  res.end();
-                }
-              });
-            }
-          } 
-        });
-        
-      }
+      bcrypt.hash(password, salt, null, (err, hash) => {
+        if (err) {
+          console.log(err);
+        } else {
+          // check if username is taken in the db
+          db.findUser(username, (err, result) => {
+            if (err) console.log(`error finding user`);
+            else {
+              if (result[0].exists) {
+                res.send(["signUp", "Sorry, this username is already taken"]);
+              } else {
+                let user = { username: username, password: hash, name: name };
+                // console.log(user); 
+                //place into the database
+                db.addUser(user, (err, data) => {
+                  if (err) console.log(err);
+                  else {
+                    console.log(data);
+                    req.session.loggedIn = true;
+                    res.end();
+                  }
+                });
+              }
+            } 
+          });
+          
+        }
+      })
     })
   }
   // res.end();

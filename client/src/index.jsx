@@ -45,6 +45,7 @@ class App extends React.Component {
     
     axios.post('/api/login', user)
       .then(({ data }) => {
+        console.log(data);
         Array.isArray(data) ? this.setState({ error: data }) : this.setState({ loggedIn: true });
       })
       .catch(error => console.log(error));
