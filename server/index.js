@@ -13,14 +13,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(sessions({secret: process.env.SECRET, resave: false, saveUninitialized: true }));
 
 app.post('/api/login', (req, res) => {
-  console.log('Heroku deployment test');
   let username = req.body.username;
   let password = req.body.password;
   if ( !username.length || !password.length ) {
     res.send(["login", "Either the username or password is missing"]);
   } 
+  
+  console.log('Heroku deployment test');
     db.findUser(username)
       .then(user => {
+        console.log(user);
         if(!user) {
           res.send(["login", "Sorry, your login and or password are incorrect!"]);
         } else {
