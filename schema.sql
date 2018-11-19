@@ -12,9 +12,6 @@ CREATE TABLE "users" (
   "vote_id" INTEGER,
   PRIMARY KEY ("id")
 );
-ALTER TABLE "users" ADD FOREIGN KEY ("vote_id") REFERENCES "destinations" ("id");
-  -- "vote_id" INTEGER,
-  -- FOREIGN KEY (vote_id) REFERENCES destination(id)
 
 CREATE TABLE "destinations" (
   "id" SERIAL,
@@ -23,3 +20,13 @@ CREATE TABLE "destinations" (
   PRIMARY KEY ("id")
 );
 
+CREATE TABLE "hotels" (
+  "id" SERIAL,
+  "name" VARCHAR(200),
+  "address" VARCHAR(200),
+  "cost" VARCHAR(200),
+  "stars" INTEGER,
+  PRIMARY KEY ("id")
+)
+
+ALTER TABLE "users" ADD FOREIGN KEY ("vote_id") REFERENCES "destinations" ("id");
