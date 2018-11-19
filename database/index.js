@@ -18,13 +18,19 @@ const addUser = (user, callback) => {
   });
 };
 
-const findUser = (username, callback) => {
+const findUser = (username) => {
   const query = 'SELECT EXISTS (SELECT 1 FROM users WHERE username=$1);';
   const params = [username];
-  client.query(query, params, (err, { rows }) => {
-    if (err) callback(err, null);
-    else callback(null, rows);
-  });
+  return new Promise ((resolve, reject) => {
+
+    client.query(query, params, (err) => {
+      if (err) reject(err);
+      getUserInfo(username, (err, data) => {
+        if (err) reject(err);
+        else resolve(data[0]);
+      })
+    });   
+  })
 };
 
 getUserInfo = (username, callback) => {

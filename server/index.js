@@ -17,36 +17,29 @@ app.post('/api/login', (req, res) => {
   let password = req.body.password;
   if ( !username.length || !password.length ) {
     res.send(["login", "Either the username or password is missing"]);
-  } else {
-    db.findUser(username, (err, result) => { 
-      if (err) {
-        console.log('err', err) 
-      } else {
-        if(!result[0].exists) {
+  } 
+    db.findUser(username)
+      .then(user => {
+        if(!user) {
           res.send(["login", "Sorry, your login and or password are incorrect!"]);
         } else {
-          // else find the user in the db with username 
-          db.getUserInfo(username, (err, info) => {
-            if(err) console.log(err);
-            else {
-              bcrypt.compare(password, info[0].password, (err, match) => {
-                if (err || !match) {
-                  res.send(["login", "Sorry, your login and or password are incorrect!"]);
-                } else {
-                  // req.session.loggedIn = true;
-                  let userInfo = { name: info[0].name.split(' ')[0], email: info[0].email, phone: info[0].phone, vote: info[0].vote };
-                  // res.end(userInfo);
-                  res.send(userInfo);                  
-                }
-              })
-            }
-          });
+          return user;
         }
-      } 
-    });
-  }
-  // res.end();
-})
+      })
+      .then(user => { 
+        bcrypt.compare(password, user.password, (err, match) => {
+          if (err || !match) {
+            res.send(["login", "Sorry, your login and or password are incorrect!"]);
+          } else {
+            // req.session.loggedIn = true;
+            let userInfo = { name: user.name.split(' ')[0], email: user.email, phone: user.phone, vote: user.vote };
+            res.send(userInfo);                  
+          }
+        })
+      })
+      .catch(err => console.log(err))
+  });
+
 
 app.post('/api/signUp', (req, res) => {
   let username = req.body.username;
