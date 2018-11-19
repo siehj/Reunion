@@ -3,13 +3,16 @@ import React from 'react';
 class UserPortal extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+
+    };
   }
 
   render() {
     return (
       <div>
-        <h3>Welcome Back, {this.props.userInfo.name},</h3>
+        <h1>Welcome Back, {this.props.userInfo.name}!</h1>
+        
       </div>
     )
   }

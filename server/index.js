@@ -20,7 +20,6 @@ app.post('/api/login', (req, res) => {
   } 
   db.findUser(username)
     .then(user => {
-      console.log(user);
       if(!user) {
         res.send(["login", "Sorry, your login and or password are incorrect!"]);
       } else {
@@ -75,7 +74,6 @@ app.post('/api/signUp', (req, res) => {
       }
     })
   })
-  
 });
 
 app.post('/api/logout', (req, res) => {
