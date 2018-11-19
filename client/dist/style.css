@@ -31,7 +31,6 @@ html {
 #Nav {
   display: flex;
   flex-direction: column;
-  padding-top: 40px;
 }
 
 .theVid {
@@ -64,7 +63,7 @@ html {
   left: 0;
   background-color: #111; /* Black*/
   overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 60px; /* Place content 60px from the top */
+  padding-top: 45px; /* Place content 60px from the top */
   transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
 }
 
@@ -115,7 +114,7 @@ span {
   margin-left: 28%;
   margin-right: 3%;
   /* width: 75%; */
-  color: #6c757d;
+  color: #f1f1f1;
 }
 
 #signUp {
@@ -135,8 +134,8 @@ span {
   right: 20px;
   bottom: 20px;
   position: absolute;
-  height: 45px;
-  width: 45px;
+  height: 50px;
+  width: 50px;
   cursor: pointer;
   z-index: 8;
 }
