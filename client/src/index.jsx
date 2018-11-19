@@ -42,19 +42,21 @@ class App extends React.Component {
   } 
 
   login(user) {
-    this.setState({ loggedIn: true })
+    
     axios.post('/api/login', user)
-      .then(({data}) => {
-        Array.isArray(data) ? this.setState({ error: data }) : null;
-      });
+      .then(({ data }) => {
+        Array.isArray(data) ? this.setState({ error: data }) : this.setState({ loggedIn: true });
+      })
+      .catch(error => console.log(error));
   }
 
   signUp(user) {
-    // this.setState({ loggedIn: true })
+    
     axios.post('/api/signUp', user)
-      .then(({data}) => {
-        Array.isArray(data) ? this.setState({ error: data }) : null;
+      .then(({ data }) => {
+        Array.isArray(data) ? this.setState({ error: data }) : this.setState({ loggedIn: true });
       })
+      .catch(error => console.log(error));
   }
 
   render() {
