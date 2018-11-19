@@ -5,10 +5,13 @@ client.connect();
 
 const addUser = (user, callback) => {
   let { username, password, name } = user;
-  const query = `INSERT into users (username, password, name) VALUES ($1, $2, $3);`;
+  const query = `INSERT into users (username, password, name, vote) VALUES ($1, $2, $3, 1);`;
   const params = [username, password, name];
-
-}
+  client.query(query, params, (err, {rows}) => {
+    if (err) callback(err, null);
+    else callback(null, rows);
+  });
+};
 
 const findUser = (username, callback) => {
   const query = 'SELECT EXISTS (SELECT 1 FROM users WHERE username=$1);';

@@ -41,16 +41,27 @@ app.post('/api/signUp', (req, res) => {
         console.log(err);
       } else {
         // check if username is taken in the db
-        // console.log(db.findUser())
-        //if found, 
-        //send back error ["signUp", "Sorry, you cannot use this username"]
+        db.findUser(username, (err, result) => {
+          if (err) console.log(`error finding user`);
+          else {
+            if (result[0].exists) {
+              res.send(["signUp", "Sorry, this username is already taken"]);
+            } else {
+              let user = { username: username, password: salt, name: name };
+              // console.log(user); 
+              //place into the database
+              db.addUser(user, (err, data) => {
+                if (err) console.log(err);
+                else {
+                  console.log(data);
+                  req.session.loggedIn = true;
+                  res.end();
+                }
+              });
+            }
+          } 
+        });
         
-        //else, 
-        let user = { username: username, password: salt, name: name };
-        console.log(user); 
-        //place into the database
-        //req.session.loggedIn = true;
-        res.end();
       }
     })
   }
