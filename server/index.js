@@ -85,7 +85,12 @@ app.post('/api/signUp', (req, res) => {
       })
     })
   }
-})
+});
+
+app.post('/api/logout', (req, res) => {
+  req.session.loggedIn = false;
+  res.end();
+});
 
 const port = process.env.PORT || 3030;
 app.listen(port, () => console.log(`Listening on port ${port}`));

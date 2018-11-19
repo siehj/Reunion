@@ -22,6 +22,7 @@ class App extends React.Component {
     this.changeScreen = this.changeScreen.bind(this);
     this.login = this.login.bind(this);
     this.signUp = this.signUp.bind(this);
+    this.logout = this.logout.bind(this);
   }
 
   componentDidMount() {
@@ -59,6 +60,11 @@ class App extends React.Component {
       })
       .catch(error => console.log(error));
   }
+  
+  logout() {
+    axios.post('/api/logout')
+      .then(() => this.setState({ loggedIn: false }));
+  }
 
   render() {
     return(
@@ -71,6 +77,7 @@ class App extends React.Component {
           currentScreen={this.state.currentScreen} 
           changeScreen={this.changeScreen}
           loggedIn={this.state.loggedIn}
+          logout={this.logout}
         />
         <Router 
           currentScreen={this.state.currentScreen}
