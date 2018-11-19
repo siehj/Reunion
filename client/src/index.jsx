@@ -46,7 +46,6 @@ class App extends React.Component {
     
     axios.post('/api/login', user)
       .then(({ data }) => {
-        console.log(data);
         Array.isArray(data) ? this.setState({ error: data }) : this.setState({ loggedIn: true, user: data });
       })
       .catch(error => console.log(error));
@@ -56,7 +55,6 @@ class App extends React.Component {
     
     axios.post('/api/signUp', user)
       .then(({ data }) => {
-        console.log(data);
         Array.isArray(data) ? this.setState({ error: data }) : this.setState({ loggedIn: true, user: data });
       })
       .catch(error => console.log(error));

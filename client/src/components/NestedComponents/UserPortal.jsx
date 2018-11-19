@@ -9,7 +9,7 @@ class UserPortal extends React.Component {
   render() {
     return (
       <div>
-        <h3>USER PORTAL</h3>
+        <h3>Welcome Back, {this.props.userInfo.name},</h3>
       </div>
     )
   }
