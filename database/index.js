@@ -1,6 +1,6 @@
 const { Client } = require('pg');
 
-const client = new Client(process.env.DB_Connection + '?ssl=true');
+const client = new Client(process.env.DATABASE_URL + '?ssl=true');
 client.connect();
 
 const addUser = (user, callback) => {
