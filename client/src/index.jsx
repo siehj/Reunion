@@ -14,7 +14,8 @@ class App extends React.Component {
       navOpen: false,
       loggedIn: false,
       error: ['', ''],
-      chatOpen: false
+      chatOpen: false,
+      user: {}
     }
     this.openNav = this.openNav.bind(this);
     this.closeNav = this.closeNav.bind(this);
@@ -46,7 +47,7 @@ class App extends React.Component {
     axios.post('/api/login', user)
       .then(({ data }) => {
         console.log(data);
-        Array.isArray(data) ? this.setState({ error: data }) : this.setState({ loggedIn: true });
+        Array.isArray(data) ? this.setState({ error: data }) : this.setState({ loggedIn: true, user: data });
       })
       .catch(error => console.log(error));
   }
@@ -55,7 +56,8 @@ class App extends React.Component {
     
     axios.post('/api/signUp', user)
       .then(({ data }) => {
-        Array.isArray(data) ? this.setState({ error: data }) : this.setState({ loggedIn: true });
+        console.log(data);
+        Array.isArray(data) ? this.setState({ error: data }) : this.setState({ loggedIn: true, user: data });
       })
       .catch(error => console.log(error));
   }
@@ -79,6 +81,7 @@ class App extends React.Component {
           signUp={this.signUp}
           error={this.state.error}
           chatOpen={this.state.chatOpen}
+          userInfo={this.state.user}
         />
       </div>
     )

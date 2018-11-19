@@ -69,14 +69,12 @@ app.post('/api/signUp', (req, res) => {
                 res.send(["signUp", "Sorry, this username is already taken"]);
               } else {
                 let user = { username: username, password: hash, name: name };
-                // console.log(user); 
                 //place into the database
-                db.addUser(user, (err, data) => {
+                db.addUser(user, (err, info) => {
                   if (err) console.log(err);
                   else {
-                    console.log(data);
-                    req.session.loggedIn = true;
-                    res.end();
+                    let userInfo = { name: info[0].name.split(' ')[0], email: info[0].email, phone: info[0].phone, vote: info[0].vote };
+                    res.send(userInfo);
                   }
                 });
               }
@@ -87,7 +85,6 @@ app.post('/api/signUp', (req, res) => {
       })
     })
   }
-  // res.end();
 })
 
 const port = process.env.PORT || 3030;

@@ -9,7 +9,12 @@ const addUser = (user, callback) => {
   const params = [username, password, name];
   client.query(query, params, (err, data) => {
     if (err) callback(err, null);
-    else callback(null, data);
+    else {
+      getUserInfo(username, (err, data) => {
+        if (err) callback(err, null);
+        else callback(null, data);
+      })
+    };
   });
 };
 
