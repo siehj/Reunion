@@ -67,7 +67,7 @@ class Accomodations extends React.Component {
           {this.state.hotels.map((hotel, i) => {
             return (
               <div key={i} >
-                <em className="accTitle" >{hotel}</em>
+                <em className="accTitle" title={hotel} >{hotel}</em>
               </div>
             )
           })}

@@ -23,6 +23,7 @@ class App extends React.Component {
     this.login = this.login.bind(this);
     this.signUp = this.signUp.bind(this);
     this.logout = this.logout.bind(this);
+    this.toggleChat = this.toggleChat.bind(this);
   }
 
   componentDidMount() {
@@ -66,6 +67,10 @@ class App extends React.Component {
       .then(() => this.setState({ loggedIn: false }));
   }
 
+  toggleChat() {
+    this.setState({ chatOpen: !this.state.chatOpen });
+  } 
+
   render() {
     return(
       <div id="application">
@@ -87,6 +92,7 @@ class App extends React.Component {
           error={this.state.error}
           chatOpen={this.state.chatOpen}
           userInfo={this.state.user}
+          toggleChat={this.toggleChat}
         />
       </div>
     )
