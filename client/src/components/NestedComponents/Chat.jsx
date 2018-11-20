@@ -14,8 +14,8 @@ class Chat extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('/api/chatMsgs')
-      .then((chatHist) => this.setState({ hx: chatHist }))
+    // axios.get('/api/chatMsgs')
+    //   .then((chatHist) => this.setState({ hx: chatHist }))
   }
 
   updateMsg(e) {

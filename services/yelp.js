@@ -1,20 +1,24 @@
-import axios from 'axios';
+const axios = require('axios');
 require('dotenv').config();
 
-const YelpApi = (query, callback) => {
+const yelpApi = (query, callback) => {
   let options = {
     url: `https://api.yelp.com/v3/businesses/search`,
     headers: {
-      'Authorization': `Bearer ${config.KEY}`
+      'Authorization': `Bearer ${process.env.KEY}`
     },
-    qs: {
+    params: {
       location: 'Las Vegas',
       term: query,
       limit: 5
     }
   };
 
-  // axios.get(options)
+  return new Promise ((resolve, reject) => {
+    axios.get(`https://api.yelp.com/v3/businesses/search`, options)
+      .then(({ data }) => resolve(data))
+      .catch(err => reject(err.response));
+  });
 }
 
-module.exports = { YelpApi }
+module.exports = { yelpApi };

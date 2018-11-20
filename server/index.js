@@ -3,7 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const sessions = require('express-session');
 const bcrypt = require('bcrypt-nodejs');
-var db = require('../database/');
+const db = require('../database/');
+const helper = require('../services/yelp');
 const io = require('socket.io');
 
 const app = express();
@@ -74,6 +75,14 @@ app.post('/api/signUp', (req, res) => {
       }
     })
   })
+});
+
+app.post('/api/searchYelp', (req, res) => {
+  // console.log(req.body.query);
+  
+  helper.yelpApi(req.body.query)
+    .then(({ businesses }) => res.send(businesses))
+    .catch(err => console.log('err with server-side search', err));
 });
 
 app.post('/api/logout', (req, res) => {

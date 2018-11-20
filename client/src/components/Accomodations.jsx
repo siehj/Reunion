@@ -8,7 +8,7 @@ class Accomodations extends React.Component {
     this.state = {
       query: '',
       activities : [],
-      savedActivities: ["ATV", 'Sky Diving', 'Helicopter', 'Speed Vegas'],
+      savedActivities: {'ATV': [], 'Sky Diving': [], 'Helicopter': [], 'Speed Vegas': []},
       hotels: ["Tahiti Village"]
     };
     this.updateQuery = this.updateQuery.bind(this);
@@ -24,7 +24,9 @@ class Accomodations extends React.Component {
   }
 
   searchYoutube() {
-    console.log('clicked', this.state.query)
+    axios.post('/api/searchYelp', { query: this.state.query })
+      .then(({ data }) => this.setState({ activities: data }))
+      .catch(err => console.log('err searching', err))
   }
 
   render() {
@@ -43,20 +45,40 @@ class Accomodations extends React.Component {
           <section>
             <em style={{ color: "#6c757d" }} >**Search for new activities</em>
             <InputGroup>
-              <Input/>
-              <Button outline color="danger" >Search</Button>
+              <Input onChange={this.updateQuery} />
+              <Button outline color="danger" onClick={this.searchYoutube} >Search</Button>
             </InputGroup>
+
+            <section>
+              {this.state.activities.map((response, i) => {
+                console.log(response)
+                return(
+                  <div key={i} >
+                    <em  >{response.name}</em>
+
+                  </div>
+                )
+              })}
+            </section>
           </section> 
           {/* : null  */}
             {/* } */}
           <section>
             <em style={{ color: "#6c757d" }} >**Click an activity for more information.</em>
-            {this.state.savedActivities.map((act, i) => {
+            {Object.keys(this.state.savedActivities).map((act, i) => {
               return ( 
-              <div key={i} className="savedAct" >
-                <em className="accTitle" >{act}</em>
-              </div>
-              )
+                <div key={i} className="savedAct" >
+                  <em className="accTitle" value={act} >{act}</em>
+                    {this.state.savedActivities[act] ? 
+                    this.state.savedActivities[act].map((business, j) => {
+                      return (
+                        <div key={j} >{business.name}</div>
+                      )
+                    })
+                    : null
+                    }
+                </div>
+                )
             })}
           </section>
         </section>
