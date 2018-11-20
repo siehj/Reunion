@@ -15,28 +15,28 @@ const Router = (props) => {
     return (
     <div>
       <About/>
-      <Chat open={props.chatOpen} toggleChat={props.toggleChat} loggedIn={props.loggedIn}  />  
+      <Chat open={props.chatOpen} toggleChat={props.toggleChat} username={props.userInfo.username} loggedIn={props.loggedIn}  />  
     </div> 
       )
   } else if (CS === 'Accomodations') {
     return (
     <div>
       <Accomodations loggedIn={props.loggedIn} />
-      <Chat open={props.chatOpen} toggleChat={props.toggleChat} loggedIn={props.loggedIn} />  
+      <Chat open={props.chatOpen} toggleChat={props.toggleChat} username={props.userInfo.username} loggedIn={props.loggedIn} />  
     </div>
       )
   } else if (CS === 'Join The Fun') {
     return (
       <div>
         <JoinTheFun/>
-        <Chat open={props.chatOpen} toggleChat={props.toggleChat} loggedIn={props.loggedIn} />  
+        <Chat open={props.chatOpen} toggleChat={props.toggleChat} username={props.userInfo.username} loggedIn={props.loggedIn} />  
       </div>
     ) 
   } else {
     return (
       <div>
         <Portal loggedIn={props.loggedIn} login={props.login} signUp={props.signUp} error={props.error} userInfo={props.userInfo}/>
-        <Chat open={props.chatOpen} toggleChat={props.toggleChat} loggedIn={props.loggedIn} />  
+        <Chat open={props.chatOpen} toggleChat={props.toggleChat} username={props.userInfo.username} loggedIn={props.loggedIn} />  
       </div>
     ) 
   }
