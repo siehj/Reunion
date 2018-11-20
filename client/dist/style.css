@@ -173,6 +173,7 @@ section {
   height: 278px;
   width: 100%;
 }
-/* #ACC h1, h2 { */
-  /* text-decoration: underline; */
-/* } */
+
+.accRow {
+  padding: 10px;
+}

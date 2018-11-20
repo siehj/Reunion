@@ -9,6 +9,7 @@ const yelpApi = (query, callback) => {
     },
     params: {
       location: 'Las Vegas',
+      sort_by: 'rating',
       term: query,
       limit: 5
     }
