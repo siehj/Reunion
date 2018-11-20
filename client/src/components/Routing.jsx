@@ -21,7 +21,7 @@ const Router = (props) => {
   } else if (CS === 'Accomodations') {
     return (
     <div>
-      <Accomodations/>
+      <Accomodations loggedIn={props.loggedIn} />
       <Chat open={props.chatOpen} loggedIn={props.loggedIn} />  
     </div>
       )

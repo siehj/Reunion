@@ -1,10 +1,30 @@
 import React from 'react';
 import axios from 'axios';
+import { Input, Button, InputGroup } from 'reactstrap';
 
 class Accomodations extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      query: '',
+      activities : [],
+      savedActivities: ["ATV", 'Sky Diving', 'Helicopter', 'Speed Vegas'],
+      hotels: ["Tahiti Village"]
+    };
+    this.updateQuery = this.updateQuery.bind(this);
+    this.searchYoutube = this.searchYoutube.bind(this);
+  }
+
+  componentDidMount() {
+    // this.setState({ savedActivities : ["ATV", 'Sky Diving', 'Helicopter', 'Speed Vegas'] });
+  }
+
+  updateQuery(e) {
+    this.setState({ query: e.target.value });
+  }
+
+  searchYoutube() {
+    console.log('clicked', this.state.query)
   }
 
   render() {
@@ -19,13 +39,40 @@ class Accomodations extends React.Component {
 
         <section>
           <h2 > ACTIVITIES </h2>
-          <em>click an activity for more information.</em>
+          {/* {this.props.loggedIn ?  */}
+          <section>
+            <em style={{ color: "#6c757d" }} >**Search for new activities</em>
+            <InputGroup>
+              <Input/>
+              <Button outline color="danger" >Search</Button>
+            </InputGroup>
+          </section> 
+          {/* : null  */}
+            {/* } */}
+          <section>
+            <em style={{ color: "#6c757d" }} >**Click an activity for more information.</em>
+            {this.state.savedActivities.map((act, i) => {
+              return ( 
+              <div key={i} className="savedAct" >
+                <em className="accTitle" >{act}</em>
+              </div>
+              )
+            })}
+          </section>
         </section>
 
         <section>
           <h2> HOTELS </h2>
-          <em>click each hotel for more information.</em>
+          <em style={{ color: "#6c757d" }} >**click each hotel for more information.</em>
+          {this.state.hotels.map((hotel, i) => {
+            return (
+              <div key={i} >
+                <em className="accTitle" >{hotel}</em>
+              </div>
+            )
+          })}
         </section>
+        <section></section>
       </div>
     )
   }
