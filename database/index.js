@@ -61,6 +61,16 @@ const showUsers = (callback) => {
     if(err) callback(err, null);
     else callback(null, rows);
   });
-}
+};
 
-module.exports = { findUser, addUser, showUsers, getUserInfo, checkUsername };
+const getAllHotelInfo = () => {
+  const query = 'SELECT * FROM hotels;';
+  return new Promise ((resolve, reject) => {
+    client.query(query, (err, { rows }) => {
+      if(err) reject(err);
+    else resolve(rows);
+    });
+  });
+};
+
+module.exports = { findUser, addUser, showUsers, getUserInfo, checkUsername, getAllHotelInfo };
