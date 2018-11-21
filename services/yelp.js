@@ -1,7 +1,7 @@
 const axios = require('axios');
 require('dotenv').config();
 
-const yelpApi = (query, callback) => {
+const yelpApi = (query) => {
   let options = {
     url: `https://api.yelp.com/v3/businesses/search`,
     headers: {
