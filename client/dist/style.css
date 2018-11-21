@@ -107,6 +107,10 @@ span {
   cursor: pointer;
 }
 
+span:hover {
+  color: #f1f1f1;
+}
+
 #About, #ACC, #Portal, #JTF {
   display: flex;
   flex-direction: column;

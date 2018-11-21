@@ -118,11 +118,12 @@ class Accomodations extends React.Component {
           <em style={{ color: "#6c757d" }} >**click each hotel for more information.</em>
           {this.state.hotels.map((hotel, i) => {
             return (
-              <div key={i} className="text-center">
-                <em className="accTitle" title={hotel.name} >{hotel.name}</em>
+              <section key={i} className="text-center">
+                <em title={hotel.name} style={{ fontSize: '30px', color: 'red' }} >{hotel.name}</em>
                 <br/>
                 <em>{hotel.address}</em>
-              </div>
+                <a href={hotel.url} target="_blank" ><img src={hotel.img} width="100%"/></a>
+              </section>
             )
           })}
         </section>
