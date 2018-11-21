@@ -2,6 +2,7 @@ const axios = require('axios');
 require('dotenv').config();
 
 const yelpApi = (query) => {
+  console.log(query, ' was searched')
   let options = {
     url: `https://api.yelp.com/v3/businesses/search`,
     headers: {
