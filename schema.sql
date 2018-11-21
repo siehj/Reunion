@@ -22,11 +22,13 @@ CREATE TABLE "destinations" (
 
 CREATE TABLE "hotels" (
   "id" SERIAL,
-  "name" VARCHAR(200),
-  "address" VARCHAR(200),
-  "cost" VARCHAR(200),
+  "name" VARCHAR(100),
+  "address" VARCHAR(100),
+  "cost" VARCHAR(10),
   "stars" INTEGER,
+  "url" VARCHAR(200),
+  "img" VARCHAR(200),
   PRIMARY KEY ("id")
-)
+);
 
 ALTER TABLE "users" ADD FOREIGN KEY ("vote_id") REFERENCES "destinations" ("id");
