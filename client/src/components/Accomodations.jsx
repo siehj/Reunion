@@ -8,15 +8,24 @@ class Accomodations extends React.Component {
     this.state = {
       query: '',
       activities : [],
-      savedActivities: {'ATV': [], 'Sky Diving': [], 'Helicopter': [], 'Speed Vegas': []},
-      hotels: ["Tahiti Village"]
+      savedActivities: {'ATV': {}, 'Sky Diving': {}, 'Helicopter': {}, 'Speed Vegas': {}},
+      hotels: []
     };
     this.updateQuery = this.updateQuery.bind(this);
     this.searchYelp = this.searchYelp.bind(this);
+    this.getHotelInfoDB = this.getHotelInfoDB.bind(this);
+    this.searchSaved = this.searchSaved.bind(this);
   }
 
   componentDidMount() {
-    // this.setState({ savedActivities : ["ATV", 'Sky Diving', 'Helicopter', 'Speed Vegas'] });
+    this.getHotelInfoDB();
+    
+  }
+
+  getHotelInfoDB() {
+    axios.get('/db/hotelInfo')
+      .then(({ data }) => this.setState({ hotels: data }))
+      .catch(err => console.log('error getting hotel data from db: ', err))
   }
 
   updateQuery(e) {
@@ -30,6 +39,10 @@ class Accomodations extends React.Component {
       .catch(err => console.log('err searching', err))
   }
 
+  searchSaved(e) {
+    console.log(e.target.title)
+  }
+
   render() {
     return (
       <div id="ACC">
@@ -41,7 +54,7 @@ class Accomodations extends React.Component {
         </section>
 
         <section>
-          <h2 > ACTIVITIES </h2>
+          <h1 > ACTIVITIES </h1>
           {/* {this.props.loggedIn ?  */}
           <section>
             <em style={{ color: "#6c757d" }} >**Search for new activities</em>
@@ -85,15 +98,15 @@ class Accomodations extends React.Component {
             {Object.keys(this.state.savedActivities).map((act, i) => {
               return ( 
                 <div key={i} className="savedAct" >
-                  <em className="accTitle" value={act} >{act}</em>
-                    {this.state.savedActivities[act] ? 
+                  <em className="accTitle" title={act} onClick={this.searchSaved} >{act}</em>
+                    {/* {this.state.savedActivities[act] ? 
                     this.state.savedActivities[act].map((business, j) => {
                       return (
                         <div key={j} >{business.name}</div>
                       )
                     })
                     : null
-                    }
+                    } */}
                 </div>
                 )
             })}
@@ -101,12 +114,14 @@ class Accomodations extends React.Component {
         </section>
 
         <section>
-          <h2> HOTELS </h2>
+          <h1> HOTELS </h1>
           <em style={{ color: "#6c757d" }} >**click each hotel for more information.</em>
           {this.state.hotels.map((hotel, i) => {
             return (
-              <div key={i} >
-                <em className="accTitle" title={hotel} >{hotel}</em>
+              <div key={i} className="text-center">
+                <em className="accTitle" title={hotel.name} >{hotel.name}</em>
+                <br/>
+                <em>{hotel.address}</em>
               </div>
             )
           })}

@@ -79,16 +79,22 @@ app.post('/api/signUp', (req, res) => {
 
 app.post('/api/searchYelp', (req, res) => {
   // console.log(req.body.query);
-  
   helper.yelpApi(req.body.query)
     .then(({ businesses }) => res.send(businesses))
     .catch(err => console.log('err with server-side search', err));
+});
+
+app.get('/db/hotelInfo', (req, res) => {
+  db.getAllHotelInfo()
+    .then(result => res.send(result))
+    .catch(err => console.log('Error getting hotel content from the db', err))
 });
 
 app.post('/api/logout', (req, res) => {
   req.session.loggedIn = false;
   res.end();
 });
+
 
 const port = process.env.PORT || 3030;
 app.listen(port, () => console.log(`Listening on port ${port}`));
