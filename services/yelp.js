@@ -2,7 +2,6 @@ const axios = require('axios');
 require('dotenv').config();
 
 const yelpApi = (query) => {
-  console.log(query, ' was searched')
   let options = {
     url: `https://api.yelp.com/v3/businesses/search`,
     headers: {
@@ -15,11 +14,11 @@ const yelpApi = (query) => {
       limit: 5
     }
   };
-
+  console.log(process.env.KEY)
   return new Promise ((resolve, reject) => {
     axios.get(`https://api.yelp.com/v3/businesses/search`, options)
       .then(({ data }) => resolve(data))
-      .catch(err => reject(err.response));
+      .catch(err => reject(err));
   });
 }
 
