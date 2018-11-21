@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import { Input, Button, InputGroup, Row, Col } from 'reactstrap';
 import Activity from './NestedComponents/AccomComponents/Activities.jsx';
+import SavedActivity from './NestedComponents/AccomComponents/SavedActs.jsx';
 
 class Accomodations extends React.Component {
   constructor(props) {
@@ -40,16 +41,14 @@ class Accomodations extends React.Component {
       .catch(err => console.log('err searching', err))
   }
 
-  searchSaved(e) {
-    let query = e.target.title;
-    
-    // axios.post('/api/searchYelp', { query: query })
-    // .then(({ data }) => {
-    //   let newSection = this.state.savedActivities;
-    //   newSection[query] = data;
-    //   this.setState({ savedActivities: newSection });
-    // })
-  }
+  searchSaved(query) {
+    axios.post('/api/searchYelp', { query: query })
+    .then(({ data }) => {
+      let newSection = this.state.savedActivities;
+      newSection[query] = data;
+      this.setState({ savedActivities: newSection });
+    });
+  };
 
   render() {
     return (
@@ -73,33 +72,25 @@ class Accomodations extends React.Component {
 
             <section>
               <br/>
-            <section>
-              {this.state.activities.map((activity, i) => {
-                return(
-                  <div className="accRow" key={i} >
-                    <Activity act={activity}/>
-                  </div>
-                )
-              })}
-            </section>
+              <section>
+                {this.state.activities.map((activity, i) => {
+                  return(
+                    <div className="accRow" key={i} >
+                      <Activity act={activity}/>
+                    </div>
+                  )
+                })}
+              </section>
             </section>
           </section> 
           {/* : null  */}
             {/* } */}
           <section>
             <em style={{ color: "#6c757d" }} >**Click an activity for more information.</em>
-            {Object.keys(this.state.savedActivities).map((act, i) => {
+            {Object.keys(this.state.savedActivities).map((act, idx) => {
               return ( 
-                <div key={i} className="savedAct" >
-                  <em className="accTitle" title={act} onClick={this.searchSaved} >{act}</em>
-                    {this.state.savedActivities[act] ? 
-                    this.state.savedActivities[act].map((business, j) => {
-                      return (
-                        <div key={j} >{business.name}</div>
-                      )
-                    })
-                    : null
-                    }
+                <div key={idx} >
+                  <SavedActivity saved={this.state.savedActivities} act={act}  searchSaved={this.searchSaved} />
                 </div>
                 )
             })}
