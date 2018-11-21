@@ -26,6 +26,7 @@ class Accomodations extends React.Component {
   searchYelp() {
     axios.post('/api/searchYelp', { query: this.state.query })
       .then(({ data }) => this.setState({ activities: data }))
+      .then(() => this.setState({ query: '' }))
       .catch(err => console.log('err searching', err))
   }
 
@@ -45,7 +46,7 @@ class Accomodations extends React.Component {
           <section>
             <em style={{ color: "#6c757d" }} >**Search for new activities</em>
             <InputGroup>
-              <Input onChange={this.updateQuery} />
+              <Input value={this.state.query} onChange={this.updateQuery}/>
               <Button outline color="danger" onClick={this.searchYelp} >Search</Button>
             </InputGroup>
 
