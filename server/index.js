@@ -87,15 +87,23 @@ app.post('/api/searchYelp', (req, res) => {
 app.get('/db/hotelInfo', (req, res) => {
   db.getAllHotelInfo()
     .then(result => res.send(result))
-    .catch(err => console.log('Error getting hotel content from the db', err))
+    .catch(err => console.log('Error getting hotel content from the db', err));
 });
 
 app.post('/api/sendUserUpdate', (req, res) => {
-  console.log(req.body);
   let updatedInfo = req.body;
-  Object.keys(updatedInfo).forEach(area => {
-    
-  });
+  let id = updatedInfo.id;
+  delete updatedInfo.id;
+
+  db.updateUser(id, updatedInfo)
+    .then(() => {
+      db.getWithId(id)
+        .then(result => {
+          res.end(result);
+        })
+        .catch(err => console.log(err));
+    })
+    .catch(err => console.log(err));
 
   res.end();
 });

@@ -68,9 +68,48 @@ const getAllHotelInfo = () => {
   return new Promise ((resolve, reject) => {
     client.query(query, (err, { rows }) => {
       if(err) reject(err);
-    else resolve(rows);
+      else resolve(rows);
     });
   });
 };
 
-module.exports = { findUser, addUser, showUsers, getUserInfo, checkUsername, getAllHotelInfo };
+const updateUser = (id, updatedInfo) => {
+
+  return new Promise ((resolve, reject) => {
+    getWithId(id)
+      .then((currentInfo) => {
+        Object.keys(updatedInfo).forEach(col => {
+          let row = updatedInfo[col];
+          if(currentInfo[col] !== updatedInfo[col]) {
+            let query = `UPDATE users SET ${col}='${row}' WHERE id=${id};`
+            client.query(query, (err, result) => {
+              if(err) reject(err);
+              else resolve(result);
+            });
+          };
+        });
+      })
+      .catch(err => console.log(err));
+  });
+  // let query = `UPDATE users SET ${col}='${row}' WHERE id=${id};`;
+  // console.log(query);
+  // return new Promise ((resolve, reject) => {
+  //   client.query(query, (err, info) => {
+  //     if(err) reject(err);
+  //     else resolve(info);
+  //   });
+  // });
+};
+
+const getWithId = (id) => {
+  const query = `SELECT * FROM users WHERE id=${id};`;
+  return new Promise ((resolve, reject) => {
+    client.query(query, (err, info ) => {
+      if(err) reject(err);
+      else resolve(info);
+    });
+  });
+};
+
+module.exports = { findUser, addUser, showUsers, getUserInfo, checkUsername, getAllHotelInfo,
+  updateUser, getWithId };
