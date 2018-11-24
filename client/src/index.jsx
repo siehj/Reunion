@@ -77,6 +77,7 @@ class App extends React.Component {
     name.length ? info['name'] = name : null;
     email.length ? info['email'] = email : null;
     phone.length ? info['phone'] = phone : null;
+    info['id'] = this.state.user['id'];
 
     axios.post('/api/sendUserUpdate', info)
       .then(({ data }) => console.log(data)) // this.setState({ user: data })

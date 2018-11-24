@@ -33,7 +33,7 @@ app.post('/api/login', (req, res) => {
           res.send(["login", "Sorry, your login and or password are incorrect!"]);
         } else {
           req.session.loggedIn = true;
-          let userInfo = { name: user.name, email: user.email, phone: user.phone, vote: user.vote };
+          let userInfo = { id: user.id, name: user.name, email: user.email, phone: user.phone, vote: user.vote };
           res.send(userInfo);                  
         }
       })
@@ -66,7 +66,7 @@ app.post('/api/signUp', (req, res) => {
             let user = { username: username, password: hash, name: name };
             db.addUser(user)
               .then((newUser) => {
-                let userInfo = { name: newUser[0].name, email: newUser[0].email, phone: newUser[0].phone, vote: newUser[0].vote };
+                let userInfo = { id: newUser[0].id, name: newUser[0].name, email: newUser[0].email, phone: newUser[0].phone, vote: newUser[0].vote };
                 res.send(userInfo);
               })
               .catch(err => console.log(err))
@@ -92,6 +92,11 @@ app.get('/db/hotelInfo', (req, res) => {
 
 app.post('/api/sendUserUpdate', (req, res) => {
   console.log(req.body);
+  let updatedInfo = req.body;
+  Object.keys(updatedInfo).forEach(area => {
+    
+  });
+
   res.end();
 });
 
