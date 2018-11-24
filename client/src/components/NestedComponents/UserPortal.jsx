@@ -10,9 +10,13 @@ class UserPortal extends React.Component {
     this.state = {
       // adminDisplay: 0
       modalOpen: false,
-      showProfile: false
+      showProfile: false,
+      name: '',
+      email: '',
+      phone: ''
     };
     this.showUserProfile = this.showUserProfile.bind(this);
+    this.updateUser = this.updateUser.bind(this);
   }
   componentDidMount() {
   //   axios.get('/api/check', props.userInfo)
@@ -23,10 +27,15 @@ class UserPortal extends React.Component {
     this.setState({ showProfile: !this.state.showProfile });
   }
 
+  updateUser(e) {
+    this.setState({ [e.target.title] : e.target.value });
+  }
+
   render() {
+    console.log(this.props.userInfo)
     return (
       <div>
-        <h1>Welcome Back, {this.props.userInfo.name}!</h1>
+        <h1>Welcome Back, {this.props.userInfo.name.split(' ')[0]}!</h1>
         { 
           this.props.userInfo.email === null || this.props.userInfo.phone === null || this.props.userInfo.name === null ?
             <section>
@@ -40,9 +49,9 @@ class UserPortal extends React.Component {
           this.state.showProfile ? 
             <section>
               <Row className="profile" >
-                <Col><em>Name: <Input placeholder={this.props.userInfo.name} /></em></Col>
-                <Col><em>Email: <Input placeholder={this.props.userInfo.email}/></em></Col>
-                <Col><em>Phone: <Input placeholder={this.props.userInfo.phone}/></em></Col>
+                <Col><em>Name: <Input title="name" onChange={this.updateUser} placeholder={this.props.userInfo.name}/></em></Col>
+                <Col><em>Email: <Input title="email" onChange={this.updateUser} placeholder={this.props.userInfo.email}/></em></Col>
+                <Col><em>Phone: <Input title="phone" onChange={this.updateUser} placeholder={this.props.userInfo.phone}/></em></Col>
                 <Col><Button style={{marginTop: '23px'}}  outline color="primary" block >Update Info</Button></Col>
               </Row>
             </section>
@@ -61,7 +70,6 @@ class UserPortal extends React.Component {
           <Button outline color="secondary" block onClick={this.showUserProfile} >Update Info</Button>
         }
         <section>
-
           <div>
 
           </div>
