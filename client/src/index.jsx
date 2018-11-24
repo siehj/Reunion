@@ -80,7 +80,7 @@ class App extends React.Component {
     info['id'] = this.state.user['id'];
 
     axios.post('/api/sendUserUpdate', info)
-      .then(({ data }) => console.log(data)) // this.setState({ user: data })
+      .then(({ data }) => this.setState({ user: data }))
       .catch(err => console.log(err));
   }
 

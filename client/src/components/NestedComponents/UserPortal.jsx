@@ -17,6 +17,7 @@ class UserPortal extends React.Component {
     };
     this.showUserProfile = this.showUserProfile.bind(this);
     this.updateUser = this.updateUser.bind(this);
+    this.send = this.send.bind(this);
   }
   componentDidMount() {
   //   axios.get('/api/check', props.userInfo)
@@ -29,6 +30,10 @@ class UserPortal extends React.Component {
 
   updateUser(e) {
     this.setState({ [e.target.title] : e.target.value });
+  }
+
+  send() {
+    this.setState({ showProfile : false }, () => this.props.sendUpdate(this.state.name, this.state.email, this.state.phone));  
   }
 
   render() {
@@ -52,7 +57,7 @@ class UserPortal extends React.Component {
                 <Col><em>Email: <Input title="email" onChange={this.updateUser} placeholder={this.props.userInfo.email}/></em></Col>
                 <Col><em>Phone: <Input title="phone" onChange={this.updateUser} placeholder={this.props.userInfo.phone}/></em></Col>
                 <Col>
-                  <Button style={{ marginTop: '23px' }} outline color="primary" block onClick={() => this.props.sendUpdate(this.state.name, this.state.email, this.state.phone)}>Update Info</Button>
+                  <Button style={{ marginTop: '23px' }} outline color="primary" block onClick={this.send}>Update Info</Button>
                 </Col>
               </Row>
             </section>

@@ -98,14 +98,13 @@ app.post('/api/sendUserUpdate', (req, res) => {
   db.updateUser(id, updatedInfo)
     .then(() => {
       db.getWithId(id)
-        .then(result => {
-          res.end(result);
+        .then(({ rows }) => {
+          return rows[0];
         })
+        .then(userInfo => res.send(userInfo))
         .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
-
-  res.end();
 });
 
 app.post('/api/logout', (req, res) => {
