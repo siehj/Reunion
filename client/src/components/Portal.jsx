@@ -37,7 +37,7 @@ class Portal extends React.Component {
     return (
     <div id="Portal" >
       {
-        this.props.loggedIn ? <UserPortal userInfo={this.props.userInfo} /> :
+        this.props.loggedIn ? <UserPortal userInfo={this.props.userInfo} sendUpdate={this.props.sendUpdate} /> :
         <div>
           <Login update={this.updateData} submit={this.submit} error={this.props.error} />
           <SignUp update={this.updateData} submit={this.submit} error={this.props.error} />

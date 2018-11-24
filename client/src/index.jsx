@@ -24,6 +24,7 @@ class App extends React.Component {
     this.signUp = this.signUp.bind(this);
     this.logout = this.logout.bind(this);
     this.toggleChat = this.toggleChat.bind(this);
+    this.sendUpdate = this.sendUpdate.bind(this);
   }
 
   componentDidMount() {
@@ -71,6 +72,17 @@ class App extends React.Component {
     this.setState({ chatOpen: !this.state.chatOpen });
   } 
 
+  sendUpdate(name, email, phone) {
+    let info = {};
+    name.length ? info['name'] = name : null;
+    email.length ? info['email'] = email : null;
+    phone.length ? info['phone'] = phone : null;
+
+    axios.post('/api/sendUserUpdate', info)
+      .then(({ data }) => console.log(data)) // this.setState({ user: data })
+      .catch(err => console.log(err));
+  }
+
   render() {
     return(
       <div id="application">
@@ -93,6 +105,7 @@ class App extends React.Component {
           chatOpen={this.state.chatOpen}
           userInfo={this.state.user}
           toggleChat={this.toggleChat}
+          sendUpdate={this.sendUpdate}
         />
       </div>
     )

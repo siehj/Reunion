@@ -90,6 +90,11 @@ app.get('/db/hotelInfo', (req, res) => {
     .catch(err => console.log('Error getting hotel content from the db', err))
 });
 
+app.post('/api/sendUserUpdate', (req, res) => {
+  console.log(req.body);
+  res.end();
+});
+
 app.post('/api/logout', (req, res) => {
   req.session.loggedIn = false;
   res.end();

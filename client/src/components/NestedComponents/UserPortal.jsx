@@ -32,7 +32,6 @@ class UserPortal extends React.Component {
   }
 
   render() {
-    console.log(this.props.userInfo)
     return (
       <div>
         <h1>Welcome Back, {this.props.userInfo.name.split(' ')[0]}!</h1>
@@ -52,7 +51,9 @@ class UserPortal extends React.Component {
                 <Col><em>Name: <Input title="name" onChange={this.updateUser} placeholder={this.props.userInfo.name}/></em></Col>
                 <Col><em>Email: <Input title="email" onChange={this.updateUser} placeholder={this.props.userInfo.email}/></em></Col>
                 <Col><em>Phone: <Input title="phone" onChange={this.updateUser} placeholder={this.props.userInfo.phone}/></em></Col>
-                <Col><Button style={{marginTop: '23px'}}  outline color="primary" block >Update Info</Button></Col>
+                <Col>
+                  <Button style={{ marginTop: '23px' }} outline color="primary" block onClick={() => this.props.sendUpdate(this.state.name, this.state.email, this.state.phone)}>Update Info</Button>
+                </Col>
               </Row>
             </section>
             : null

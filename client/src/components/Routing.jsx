@@ -35,7 +35,7 @@ const Router = (props) => {
   } else {
     return (
       <div>
-        <Portal loggedIn={props.loggedIn} login={props.login} signUp={props.signUp} error={props.error} userInfo={props.userInfo}/>
+        <Portal loggedIn={props.loggedIn} login={props.login} signUp={props.signUp} error={props.error} userInfo={props.userInfo} sendUpdate={props.sendUpdate} />
         <Chat open={props.chatOpen} toggleChat={props.toggleChat} username={props.userInfo.username} loggedIn={props.loggedIn} />  
       </div>
     ) 
