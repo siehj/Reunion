@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button, Alert, Input, Row, Col } from 'reactstrap';
+import VotingComponent from './ProfileComponents/Voting.jsx';
+import Itenerary from './ProfileComponents/Itenerary.jsx';
 import axios from 'axios';
 import Modal from './Modal.jsx';
 
@@ -9,11 +11,14 @@ class UserPortal extends React.Component {
     super(props);
     this.state = {
       // adminDisplay: 0
+      miniScreen: '',
       modalOpen: false,
       showProfile: false,
       name: '',
       email: '',
-      phone: ''
+      phone: '',
+      city: '',
+      state: ''
     };
     this.showUserProfile = this.showUserProfile.bind(this);
     this.updateUser = this.updateUser.bind(this);
@@ -33,7 +38,7 @@ class UserPortal extends React.Component {
   }
 
   send() {
-    this.setState({ showProfile : false }, () => this.props.sendUpdate(this.state.name, this.state.email, this.state.phone));  
+    this.setState({ showProfile : false }, () => this.props.sendUpdate(this.state.name, this.state.email, this.state.phone, this.state.city, this.state.state));  
   }
 
   render() {
@@ -48,27 +53,34 @@ class UserPortal extends React.Component {
               </Alert>
             </section> 
           : null
+        }{ 
+          this.props.userInfo.city === null || this.props.userInfo.state === null ?
+            <section>
+              <Alert color="warning" >
+                We are missing your location information, please update this information. 
+              </Alert>
+            </section> 
+          : null
         }
         {
           this.state.showProfile ? 
             <section>
               <Row className="profile" >
-                <Col><em>Name: <Input title="name" onChange={this.updateUser} placeholder={this.props.userInfo.name}/></em></Col>
+                {/* <Col><em>Name: <Input title="name" onChange={this.updateUser} placeholder={this.props.userInfo.name}/></em></Col> */}
                 <Col><em>Email: <Input title="email" onChange={this.updateUser} placeholder={this.props.userInfo.email}/></em></Col>
                 <Col><em>Phone: <Input title="phone" onChange={this.updateUser} placeholder={this.props.userInfo.phone}/></em></Col>
+              </Row>
+              <Row>
+                <Col><em>City: <Input title="city" onChange={this.updateUser} placeholder={this.props.userInfo.city}/></em></Col>
+                <Col><em>State: <Input title="state" onChange={this.updateUser} placeholder={this.props.userInfo.state}/></em></Col>                
+              </Row>
+              <Row>
                 <Col>
                   <Button style={{ marginTop: '23px' }} outline color="primary" block onClick={this.send}>Update Info</Button>
                 </Col>
               </Row>
             </section>
             : null
-            // <section>
-            //   <Row className="profile" >
-            //     <Col><em>Name: {this.props.userInfo.name}</em></Col>
-            //     <Col><em>Email: {this.props.userInfo.email}</em></Col>
-            //     <Col><em>Phone: {this.props.userInfo.phone}</em></Col>
-            //   </Row>
-            // </section>
         }
         {
           this.state.showProfile ? 
@@ -76,8 +88,18 @@ class UserPortal extends React.Component {
           <Button outline color="secondary" block onClick={this.showUserProfile} >Update Info</Button>
         }
         <section>
-          <div>
+          <div className="tabs" >
+            <Row className="text-center" >
+              <Col><h3>Itenerary</h3></Col>
+              <Col><h3>Voting</h3></Col>
+              <Col><h3>Profile</h3></Col>
+            </Row>
+          </div>
 
+          <div>
+            { 
+              this.state.miniScreen === 'itenerary' ? <Itenerary/> : <VotingComponent />   
+            }
           </div>
         </section>
       </div>

@@ -72,11 +72,13 @@ class App extends React.Component {
     this.setState({ chatOpen: !this.state.chatOpen });
   } 
 
-  sendUpdate(name, email, phone) {
+  sendUpdate(name, email, phone, city, state) {
     let info = {};
     name.length ? info['name'] = name : null;
     email.length ? info['email'] = email : null;
     phone.length ? info['phone'] = phone : null;
+    state.length? info['state'] = state : null;
+    city.length ? info['city'] = city : null;
     info['id'] = this.state.user['id'];
 
     axios.post('/api/sendUserUpdate', info)
