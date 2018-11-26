@@ -1,9 +1,10 @@
 import React from 'react';
+import { Input, Button } from 'reactstrap'
 
 const VotingComponent = (props) => {
   return (
     <div>
-    <h4>VOTING</h4>
+      <Input></Input> <Button>Add Location</Button>
     </div>
   )
 };

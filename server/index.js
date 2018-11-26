@@ -33,7 +33,6 @@ app.post('/api/login', (req, res) => {
           res.send(["login", "Sorry, your login and or password are incorrect!"]);
         } else {
           req.session.loggedIn = true;
-          console.log(user);
           let userInfo = { id: user.id, name: user.name, email: user.email, phone: user.phone, vote: user.vote, city: user.city, state: user.state };
           res.send(userInfo);                  
         }

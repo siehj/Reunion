@@ -11,7 +11,8 @@ class UserPortal extends React.Component {
     super(props);
     this.state = {
       // adminDisplay: 0
-      miniScreen: '',
+      screens: ['itenerary', 'voting'],
+      miniScreen: 'itenerary',
       modalOpen: false,
       showProfile: false,
       name: '',
@@ -23,6 +24,7 @@ class UserPortal extends React.Component {
     this.showUserProfile = this.showUserProfile.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.send = this.send.bind(this);
+    this.changeScreen = this.changeScreen.bind(this);
   }
   componentDidMount() {
   //   axios.get('/api/check', props.userInfo)
@@ -39,6 +41,10 @@ class UserPortal extends React.Component {
 
   send() {
     this.setState({ showProfile : false }, () => this.props.sendUpdate(this.state.name, this.state.email, this.state.phone, this.state.city, this.state.state));  
+  }
+
+  changeScreen(e) {
+    this.setState({ miniScreen : e.target.title })
   }
 
   render() {
@@ -90,9 +96,12 @@ class UserPortal extends React.Component {
         <section>
           <div className="tabs" >
             <Row className="text-center" >
-              <Col><h3>Itenerary</h3></Col>
-              <Col><h3>Voting</h3></Col>
-              <Col><h3>Profile</h3></Col>
+              {this.state.screens.map((screen, idx) => {
+                return <Col key={idx} ><h3 title={screen} onClick={this.changeScreen} >{screen}</h3></Col>
+              })}
+              {/* <Col><h3 title="itenerary" onClick={this.changeScreen} >Itenerary</h3></Col>
+              <Col><h3 title="voting" onClick={this.changeScreen} >Voting</h3></Col> */}
+              {/* <Col><h3>Profile</h3></Col> */}
             </Row>
           </div>
 
