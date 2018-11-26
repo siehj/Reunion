@@ -12,6 +12,13 @@ class UserPortal extends React.Component {
     this.state = {
       // adminDisplay: 0
       screens: ['itenerary', 'voting'],
+      itenerary: {
+        Thursday: {},
+        Friday: {},
+        Saturday: {},
+        Sunday: {}
+      },
+      voting: [],
       miniScreen: 'itenerary',
       modalOpen: false,
       showProfile: false,
@@ -97,7 +104,7 @@ class UserPortal extends React.Component {
           <div className="tabs" >
             <Row className="text-center" >
               {this.state.screens.map((screen, idx) => {
-                return <Col key={idx} ><h3 title={screen} onClick={this.changeScreen} >{screen}</h3></Col>
+                return <Col key={idx} ><h3 title={screen} style={{ textDecoration: this.state.miniScreen === screen ? 'underline' : null, fontSize: this.state.miniScreen === screen ? '35px' : null }} onClick={this.changeScreen} >{screen.toUpperCase()}</h3></Col>
               })}
               {/* <Col><h3 title="itenerary" onClick={this.changeScreen} >Itenerary</h3></Col>
               <Col><h3 title="voting" onClick={this.changeScreen} >Voting</h3></Col> */}
@@ -107,7 +114,7 @@ class UserPortal extends React.Component {
 
           <div>
             { 
-              this.state.miniScreen === 'itenerary' ? <Itenerary/> : <VotingComponent />   
+              this.state.miniScreen === 'itenerary' ? <Itenerary sched={this.state.itenerary} /> : <VotingComponent />   
             }
           </div>
         </section>
