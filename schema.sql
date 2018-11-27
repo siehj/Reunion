@@ -31,4 +31,46 @@ CREATE TABLE "hotels" (
   PRIMARY KEY ("id")
 );
 
+CREATE TABLE "itenerary" (
+  "id" SERIAL,
+  "day" VARCHAR(10),
+  PRIMARY KEY ("id")
+); 
+
+CREATE TABLE "iteneraryItems" (
+  "id" SERIAL,
+  "name" VARCHAR(50),
+  "location" VARCHAR(100),
+  "url" VARCHAR(200),
+  "day_id" INTEGER,
+  PRIMARY KEY ("id")
+);
+
+CREATE TABLE "votingTopics" (
+  "id" SERIAL,
+  "Title" VARCHAR(50),
+  "Summary" VARCHAR(100),
+  PRIMARY KEY ("id")
+);
+
+CREATE TABLE "votingItems" (
+  "id" SERIAL,
+  "name" VARCHAR(50),
+  "location" VARCHAR(100),
+  "votes" INTEGER,
+  "topic_id" INTEGER,
+  PRIMARY KEY ("id")
+);
+
+CREATE TABLE "user_voting" (
+  "id" SERIAL,
+  "user_id" INTEGER,
+  "item_id" INTEGER,
+  PRIMARY KEY ("id")
+);
+
+ALTER TABLE "iteneraryItems" ADD FOREIGN KEY ("day_id") REFERENCES "itenerary" ("id");
+ALTER TABLE "votingItems" ADD FOREIGN KEY ("topic_id") REFERENCES "votingTopics" ("id");
+ALTER TABLE "user_voting" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "user_voting" ADD FOREIGN KEY ("item_id") REFERENCES "votingItems" ("id");
 ALTER TABLE "users" ADD FOREIGN KEY ("vote_id") REFERENCES "destinations" ("id");
