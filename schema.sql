@@ -37,7 +37,7 @@ CREATE TABLE "itenerary" (
   PRIMARY KEY ("id")
 ); 
 
-CREATE TABLE "iteneraryItems" (
+CREATE TABLE "itenerary_items" (
   "id" SERIAL,
   "name" VARCHAR(50),
   "location" VARCHAR(100),
@@ -46,14 +46,14 @@ CREATE TABLE "iteneraryItems" (
   PRIMARY KEY ("id")
 );
 
-CREATE TABLE "votingTopics" (
+CREATE TABLE "voting_topics" (
   "id" SERIAL,
   "Title" VARCHAR(50),
   "Summary" VARCHAR(100),
   PRIMARY KEY ("id")
 );
 
-CREATE TABLE "votingItems" (
+CREATE TABLE "voting_items" (
   "id" SERIAL,
   "name" VARCHAR(50),
   "location" VARCHAR(100),
@@ -62,15 +62,15 @@ CREATE TABLE "votingItems" (
   PRIMARY KEY ("id")
 );
 
-CREATE TABLE "user_voting" (
+CREATE TABLE "users_voting" (
   "id" SERIAL,
   "user_id" INTEGER,
   "item_id" INTEGER,
   PRIMARY KEY ("id")
 );
 
-ALTER TABLE "iteneraryItems" ADD FOREIGN KEY ("day_id") REFERENCES "itenerary" ("id");
-ALTER TABLE "votingItems" ADD FOREIGN KEY ("topic_id") REFERENCES "votingTopics" ("id");
-ALTER TABLE "user_voting" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
-ALTER TABLE "user_voting" ADD FOREIGN KEY ("item_id") REFERENCES "votingItems" ("id");
-ALTER TABLE "users" ADD FOREIGN KEY ("vote_id") REFERENCES "destinations" ("id");
+ALTER TABLE "itenerary_items" ADD FOREIGN KEY ("day_id") REFERENCES "itenerary" ("id");
+ALTER TABLE "voting_items" ADD FOREIGN KEY ("topic_id") REFERENCES "voting_topics" ("id");
+ALTER TABLE "users_voting" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "users_voting" ADD FOREIGN KEY ("item_id") REFERENCES "voting_items" ("id");
+-- ALTER TABLE "users" ADD FOREIGN KEY ("vote_id") REFERENCES "destinations" ("id");
