@@ -2,6 +2,7 @@ import React from 'react';
 import { Button, Alert, Input, Row, Col } from 'reactstrap';
 import VotingComponent from './ProfileComponents/Voting.jsx';
 import Itenerary from './ProfileComponents/Itenerary.jsx';
+import fake from '../../../../database/TemporaryData.js';
 import axios from 'axios';
 import Modal from './Modal.jsx';
 
@@ -13,12 +14,12 @@ class UserPortal extends React.Component {
       // adminDisplay: 0
       screens: ['itenerary', 'voting'],
       itenerary: {
-        Thursday: {},
-        Friday: {},
-        Saturday: {},
-        Sunday: {}
+        Thursday: [],
+        Friday: [],
+        Saturday: [],
+        Sunday: []
       },
-      voting: [],
+      voting: fake,
       miniScreen: 'itenerary',
       modalOpen: false,
       showProfile: false,
@@ -114,7 +115,7 @@ class UserPortal extends React.Component {
 
           <div>
             { 
-              this.state.miniScreen === 'itenerary' ? <Itenerary sched={this.state.itenerary} /> : <VotingComponent />   
+              this.state.miniScreen === 'itenerary' ? <Itenerary sched={this.state.itenerary} /> : <VotingComponent item={this.state.voting} />   
             }
           </div>
         </section>

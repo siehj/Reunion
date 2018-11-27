@@ -192,3 +192,11 @@ section {
   padding-top: 30px;
   cursor: pointer;
 }
+
+.iteneraryItem {
+  padding: 20px;
+}
+
+.votingTopic {
+  padding: 20px;
+}

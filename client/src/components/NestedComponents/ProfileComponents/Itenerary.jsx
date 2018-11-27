@@ -6,9 +6,11 @@ const Itenerary = (props) => {
       {
         Object.keys(props.sched).map((day, idx) => {
           return (
-            <div key={idx}>
+            <div key={idx} className="iteneraryItem" >
               <h3>{day}</h3>
-              
+              {
+                props.sched[day].length ? null : <div><em>No events have been set for this day</em></div>
+              }
             </div>
           )
         })
