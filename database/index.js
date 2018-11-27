@@ -103,5 +103,25 @@ const getWithId = (id) => {
   });
 };
 
+const getAllVotingTopics = () => {
+  const query = `SELECT * FROM voting_topics;`;
+  return new Promise ((resolve, reject) => {
+    client.query(query, (err, topics) => {
+      if(err) reject(err);
+      else resolve(topics);
+    });
+  });
+};
+
+const getVotingItemsByTopic = (topicID) => {
+  const query = `SELECT * FROM voting_items WHERE topic_id=${topicID};`;
+  return new Promise ((resolve, reject) => {
+    client.query(query, (err, items) => {
+      if(err) reject(err);
+      else resolve(items);
+    });
+  });
+};
+
 module.exports = { findUser, addUser, showUsers, getUserInfo, checkUsername, getAllHotelInfo,
-  updateUser, getWithId };
+  updateUser, getWithId, getAllVotingTopics, getVotingItemsByTopic };

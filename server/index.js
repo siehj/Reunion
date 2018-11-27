@@ -107,6 +107,12 @@ app.post('/api/sendUserUpdate', (req, res) => {
     .catch(err => console.log(err));
 });
 
+app.get('/api/getAllVotingTopics', (req, res) => {
+  db.getAllVotingTopics()
+    .then(({ rows }) => console.log(rows))
+    .catch(err => console.log(err));
+});
+
 app.post('/api/logout', (req, res) => {
   req.session.loggedIn = false;
   res.end();

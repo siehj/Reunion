@@ -2,7 +2,6 @@ import React from 'react';
 import { Input, Button, Row, Col } from 'reactstrap'
 
 const VotingComponent = (props) => {
-  console.log(props.item)
   return (
     <div className="userPortalMiniScreen" >
       {/* <Input></Input> <Button>Add Location</Button> */}
