@@ -91,14 +91,6 @@ const updateUser = (id, updatedInfo) => {
       })
       .catch(err => console.log(err));
   });
-  // let query = `UPDATE users SET ${col}='${row}' WHERE id=${id};`;
-  // console.log(query);
-  // return new Promise ((resolve, reject) => {
-  //   client.query(query, (err, info) => {
-  //     if(err) reject(err);
-  //     else resolve(info);
-  //   });
-  // });
 };
 
 const getWithId = (id) => {
