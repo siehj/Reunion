@@ -2,7 +2,7 @@ import React from 'react';
 
 const Itenerary = (props) => {
   return (
-    <div>
+    <div className="userPortalMiniScreen" >
       {
         Object.keys(props.sched).map((day, idx) => {
           return (

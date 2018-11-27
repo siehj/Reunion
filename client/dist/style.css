@@ -200,3 +200,12 @@ section {
 .votingTopic {
   padding: 20px;
 }
+
+.userPortalMiniScreen {
+  padding-top: 20px;
+  padding-bottom: 35px;
+}
+
+h6 {
+  padding-bottom: 10px;
+}
