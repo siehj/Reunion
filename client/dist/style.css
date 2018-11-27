@@ -205,6 +205,9 @@ section {
   padding-top: 20px;
   padding-bottom: 35px;
 }
+.userPortalMiniScreen h3 {
+  color: #6c757d;
+}
 
 h6 {
   padding-bottom: 10px;

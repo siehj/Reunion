@@ -21,7 +21,7 @@ const VotingComponent = (props) => {
                         <h5>Name: {op.name}</h5>
                         <em>Location: {op.location}</em>
                       </Col>
-                      <Col sm="2" md="2" lg="2"><h5>{op.votes}</h5></Col>
+                      <Col sm="2" md="2" lg="2"className="text-center" ><h5>{op.votes}</h5></Col>
                       <Col sm="2" md="2" lg="2"><Button>Vote</Button></Col>
                     </Row>
                   )
