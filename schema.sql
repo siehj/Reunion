@@ -48,8 +48,8 @@ CREATE TABLE "itenerary_items" (
 
 CREATE TABLE "voting_topics" (
   "id" SERIAL,
-  "Title" VARCHAR(50),
-  "Summary" VARCHAR(100),
+  "title" VARCHAR(50),
+  "summary" VARCHAR(100),
   PRIMARY KEY ("id")
 );
 
@@ -58,6 +58,7 @@ CREATE TABLE "voting_items" (
   "name" VARCHAR(50),
   "location" VARCHAR(100),
   "votes" INTEGER,
+  "url" VARCHAR(200),
   "topic_id" INTEGER,
   PRIMARY KEY ("id")
 );

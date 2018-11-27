@@ -62,7 +62,7 @@ class UserPortal extends React.Component {
         { 
           this.props.userInfo.email === null || this.props.userInfo.phone === null || this.props.userInfo.name === null ?
             <section>
-              <Alert color="primary" >
+              <Alert color="secondary" >
                 Some data is missing from your profile, please update as soon as possible to ensure you can be contacted with updates on the trip.
               </Alert>
             </section> 
