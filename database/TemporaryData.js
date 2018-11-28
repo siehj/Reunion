@@ -46,7 +46,7 @@ const fake = [
   {
     Title: 'Friday night or Saturday night?', 
     Summary: "Vote if you'd like to go to dinner and club on Friday or Saturday night.",
-    options: { Friday : 0, Saturday : 0 } 
+    options: { Friday : { votes : 0 }, Saturday : { votes : 0 } } 
   }
 ]
 

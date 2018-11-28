@@ -108,8 +108,49 @@ app.post('/api/sendUserUpdate', (req, res) => {
 });
 
 app.get('/api/getAllVotingTopics', (req, res) => {
+  let shaped = [];
   db.getAllVotingTopics()
-    .then(({ rows }) => console.log(rows))
+    .then(({ rows }) => {
+      rows.forEach(topic => {
+        db.getVotingItemsByTopic(topic.id
+        //   , (err, {rows}) => {
+        //   if(err) console.log(err);
+        //   else {
+        //     if(rows.every((el) => el.location !== null)) {
+        //       topic.options = rows;
+        //       shaped.push(topic);
+        //     } else {
+        //       let obj = {};
+        //       rows.map(option => {
+        //         obj[option.name] = option;
+        //       });
+        //       topic.options = obj;
+        //       shaped.push(topic);
+        //     }
+            
+        //   }
+        // }
+        )
+        .then(() => {
+          if(rows.every((el) => el.location !== null)) {
+            topic.options = rows;
+            shaped.push(topic);
+          } else {
+            let obj = {};
+            rows.map(option => {
+              obj[option.name] = option;
+            });
+            topic.options = obj;
+            shaped.push(topic);
+          }
+        })
+        .catch(err => console.log(err));
+      })
+      return;
+      // console.log(shaped);
+      // .then(() => console.log(shaped))
+    })
+    .then(() => console.log(shaped))
     .catch(err => console.log(err));
 });
 

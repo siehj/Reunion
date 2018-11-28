@@ -106,19 +106,87 @@ const getWithId = (id) => {
 const getAllVotingTopics = () => {
   const query = `SELECT * FROM voting_topics;`;
   return new Promise ((resolve, reject) => {
-    client.query(query, (err, topics) => {
+    client.query(query, (err, { rows }) => {
       if(err) reject(err);
-      else resolve(topics);
+      else resolve(rows);
     });
   });
 };
 
 const getVotingItemsByTopic = (topicID) => {
   const query = `SELECT * FROM voting_items WHERE topic_id=${topicID};`;
+  // client.query(query, (err, result) => {
+  //   if(err) callback(err, null);
+  //   else callback(null, result);
+  // });
   return new Promise ((resolve, reject) => {
-    client.query(query, (err, items) => {
+    client.query(query, (err, { rows }) => {
       if(err) reject(err);
-      else resolve(items);
+      else resolve(rows);
+    });
+  });
+};
+
+const getVoting = () => {
+  return new Promise ((resolve, reject) => {
+    getAllVotingTopics()
+      .then( topics => {
+        topics['options'] = [];
+        topics.map(topic => {
+          getVotingItemsByTopic(topic.id)
+            .then(items => topics.options.push(itmes))
+        });
+      })
+      .catch(err => reject(err)) 
+  });
+};
+
+const getItenerary = () => {
+  const query = `SELECT * FROM itenerary;`;
+  return new Promise((resolve, reject) => {
+    client.query(query, (err, { rows }) => {
+      if(err) reject(err);
+      else resolve(rows);
+    });
+  });
+};
+
+const getEntireItenerary = () => {
+  return new Promise ((resolve, reject) => {
+    getItenerary()
+      .then( itenerary => {
+        let response = {};
+        itenerary.forEach( day => {
+          response[day] = [];
+          const query = `SELECT * FROM itenerary_items WHERE day_id=${day.id};`;
+          client.query(query,( err, { rows }) => {
+            if(err) reject(err);
+            else {
+              repsonse[day].push(rows);
+              resolve(response);
+            }
+          });
+        });
+      })
+      .catch(err => reject(err));
+  });
+};
+
+
+// User story, a user can vote for any ONE option within a given Topic. 
+const vote = () => {
+  
+
+};
+
+// Checks a user's voting eligibility by checking the users_voting table to see if the userId is there
+const checkVotes = (userId) => {
+  const query = 'SELECT EXISTS (SELECT 1 FROM users_voting WHERE user_id=$1);';
+  const params = [userId];
+  return new Promise ((resolve, reject) => {
+    client.query(query, (err, result) => {
+      if(err) reject(err);
+      else resolve(result);
     });
   });
 };
