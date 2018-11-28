@@ -32,7 +32,7 @@ const VotingComponent = (props) => {
                   return (
                       <Col sm="6" md="6" lg="6" key={j}  >
                         <h5>{op}</h5>
-                        <h5>{topic.options[op]}</h5>
+                        <h5>{topic.options[op].votes}</h5>
                         <Button>Vote</Button>
                       </Col>
                   )
