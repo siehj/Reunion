@@ -29,11 +29,12 @@ const VotingComponent = (props) => {
                 <Row className="votingOptions" className="text-center" >
                 {
                   Object.keys(topic.options).map((op, j) => {
-                  return (
+                    return (
                       <Col sm="6" md="6" lg="6" key={j}  >
                         <h5>{op}</h5>
                         <h5>{topic.options[op].votes}</h5>
-                        <Button>Vote</Button>
+                      
+                        <Button onClick={() => props.vote(topic.options[op])} >Vote</Button>
                       </Col>
                   )
                   })

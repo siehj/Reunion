@@ -127,16 +127,34 @@ const getVotingItemsByTopic = (topicID) => {
   });
 };
 
+const getAllItems = (arr) => {
+  
+}
+
 const getVoting = () => {
   return new Promise ((resolve, reject) => {
     getAllVotingTopics()
       .then( topics => {
-        topics['options'] = [];
-        topics.map(topic => {
-          getVotingItemsByTopic(topic.id)
-            .then(items => topics.options.push(itmes))
+        return new Promise((res, rej) => {
+          topics.map(topic => {
+          let count = 1;
+          topic['options'] = [];
+            getVotingItemsByTopic(topic.id)
+              .then(items => topic.options = items)
+              .then(() => res(topics))
+              .catch(err => rej(err));
+          })
+          
         });
       })
+      // .then( topics => {
+      //   topics.forEach(t => {
+      //     getVotingItemsByTopic(t.id)
+      //       .then(items => t.options = items)
+      //       .then(() => resolve(t))
+      //   })
+      // })
+      .then(result => console.log('result...', result))
       .catch(err => reject(err)) 
   });
 };
@@ -192,4 +210,4 @@ const checkVotes = (userId) => {
 };
 
 module.exports = { findUser, addUser, showUsers, getUserInfo, checkUsername, getAllHotelInfo,
-  updateUser, getWithId, getAllVotingTopics, getVotingItemsByTopic };
+  updateUser, getWithId, getAllVotingTopics, getVotingItemsByTopic, getVoting };

@@ -33,6 +33,7 @@ class UserPortal extends React.Component {
     this.updateUser = this.updateUser.bind(this);
     this.send = this.send.bind(this);
     this.changeScreen = this.changeScreen.bind(this);
+    this.castVote = this.castVote.bind(this);
   }
   componentDidMount() {
   //   axios.get('/api/check', props.userInfo)
@@ -54,7 +55,12 @@ class UserPortal extends React.Component {
   }
 
   changeScreen(e) {
-    this.setState({ miniScreen : e.target.title })
+    this.setState({ miniScreen : e.target.title });
+  }
+
+  castVote(item) {
+    axios.post('/api/castVote', item)
+      .then(() => console.log(complete));
   }
 
   render() {
@@ -117,7 +123,7 @@ class UserPortal extends React.Component {
 
           <div>
             { 
-              this.state.miniScreen === 'itenerary' ? <Itenerary sched={this.state.itenerary} /> : <VotingComponent item={this.state.voting} />   
+              this.state.miniScreen === 'itenerary' ? <Itenerary sched={this.state.itenerary} /> : <VotingComponent vote={this.castVote} item={this.state.voting} />   
             }
           </div>
         </section>
