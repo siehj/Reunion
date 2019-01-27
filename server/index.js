@@ -3,7 +3,6 @@ const express = require('express');
 const sessions = require('express-session');
 const bodyParser = require('body-parser');
 const db = require('../database/');
-const helper = require('../services/yelp');
 const router = require('./routes.js')
 const io = require('socket.io');
 
@@ -14,14 +13,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(sessions({secret: process.env.SECRET, resave: false, saveUninitialized: true }));
 
 app.use('/', router);
-
-
-app.post('/api/searchYelp', (req, res) => {
-  // console.log(req.body.query);
-  helper.yelpApi(req.body.query)
-    .then(({ businesses }) => res.send(businesses))
-    .catch(err => console.log('err with server-side search', err));
-});
 
 app.get('/db/hotelInfo', (req, res) => {
   db.getAllHotelInfo()
@@ -95,11 +86,6 @@ app.get('/api/getAllVotingTopics', (req, res) => {
 
 app.post('/api/castVote', (req, res) => {
 
-});
-
-app.post('/api/logout', (req, res) => {
-  req.session.loggedIn = false;
-  res.end();
 });
 
 
