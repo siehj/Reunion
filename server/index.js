@@ -20,22 +20,7 @@ app.get('/db/hotelInfo', (req, res) => {
     .catch(err => console.log('Error getting hotel content from the db', err));
 });
 
-app.post('/api/sendUserUpdate', (req, res) => {
-  let updatedInfo = req.body;
-  let id = updatedInfo.id;
-  delete updatedInfo.id;
-
-  db.updateUser(id, updatedInfo)
-    .then(() => {
-      db.getWithId(id)
-        .then(({ rows }) => {
-          return rows[0];
-        })
-        .then(userInfo => res.send(userInfo))
-        .catch(err => console.log(err));
-    })
-    .catch(err => console.log(err));
-});
+app.post('/api/sendUserUpdate', );
 
 app.get('/api/getAllVotingTopics', (req, res) => {
   // let shaped = [];

@@ -1,8 +1,9 @@
 const router = require('express').Router();
-const auth = require('./Routes/auth.js');
-const voting = require('./Routes/voting.js');
-const itenerary = require('./Routes/itenerary.js');
-const yelp = require('./Routes/yelp.js');
+const auth = require('./Routes/auth');
+const voting = require('./Routes/voting');
+const itenerary = require('./Routes/itenerary');
+const yelp = require('./Routes/yelp');
+const user = require('./Routes/userProfile');
 
 
 // Registration routes
@@ -12,6 +13,9 @@ router.post('/api/logout', auth.logout);
 
 // Yelp api logic
 router.post('/api/searchYelp', yelp.searchYelp);
+
+// User Profile routes
+router.post('/api/sendUserUpdate', user.updateUser);
 
 module.exports = router;
 
