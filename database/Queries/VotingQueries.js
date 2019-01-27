@@ -26,29 +26,20 @@ module.exports = {
   'getVoting' : () => {
     return new Promise ((resolve, reject) => {
       getAllVotingTopics()
-        .then( topics => {
-          return new Promise((res, rej) => {
+        .then(topics => {
+          return new Promise((resolve, reject) => {
             topics.map(topic => {
-            let count = 1;
             topic['options'] = [];
               getVotingItemsByTopic(topic.id)
                 .then(items => topic.options = items)
-                .then(() => res(topics))
-                .catch(err => rej(err));
-            })
-            
+                .then(() => resolve(topics))
+                .catch(err => reject(err));
+            }) 
           });
         })
-        // .then( topics => {
-        //   topics.forEach(t => {
-        //     getVotingItemsByTopic(t.id)
-        //       .then(items => t.options = items)
-        //       .then(() => resolve(t))
-        //   })
-        // })
         .then(result =>  resolve(result))
-        .catch(err => reject(err)) 
-    });
+        .catch(err => reject(err)); 
+    })
   },
   // User story, a user can vote for any ONE option within a given Topic. 
   'vote' : () => {},
@@ -64,4 +55,4 @@ module.exports = {
       });
     });
   }
-}
+};
