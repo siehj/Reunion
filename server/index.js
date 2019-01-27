@@ -151,7 +151,7 @@ app.get('/api/getAllVotingTopics', (req, res) => {
   //   .then((data) => console.log(data))
   //   .catch(err => console.log(err));
   db.getVoting()
-    .then(result => console.log(result))
+    .then(result => res.send(result))
 });
 
 app.post('/api/castVote', (req, res) => {

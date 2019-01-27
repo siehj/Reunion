@@ -154,7 +154,7 @@ const getVoting = () => {
       //       .then(() => resolve(t))
       //   })
       // })
-      .then(result => console.log('result...', result))
+      .then(result =>  resolve(result))
       .catch(err => reject(err)) 
   });
 };

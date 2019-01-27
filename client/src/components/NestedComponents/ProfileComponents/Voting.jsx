@@ -7,13 +7,13 @@ const VotingComponent = (props) => {
       {/* <Input></Input> <Button>Add Location</Button> */}
       {
         props.item.map((topic, idx) => {
-          return (
-            <div key={idx} className="votingTopic">
-              <h3 className="text-center" >{topic.Title}</h3>
-              <h6 className="text-center" >{topic.Summary}</h6>
-              {
-                Array.isArray(topic.options) ? 
-                topic.options.map((op, i) => {
+         return (
+           <div key={idx} className="votingTopic">
+             <h3 className="text-center" >{topic.Title}</h3>
+             <h6 className="text-center" >{topic.Summary}</h6>
+             {
+               Array.isArray(topic.options) ? 
+               topic.options.map((op, i) => {
                   return (
                     <Row className="votingOptions" key={i}>
                       <Col sm="8" md="8" lg="8">
@@ -23,6 +23,7 @@ const VotingComponent = (props) => {
                       <Col sm="2" md="2" lg="2"className="text-center" ><h5>{op.votes}</h5></Col>
                       <Col sm="2" md="2" lg="2"><Button>Vote</Button></Col>
                     </Row>
+                
                   )
                 })
                 : 

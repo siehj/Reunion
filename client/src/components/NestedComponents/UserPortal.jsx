@@ -39,7 +39,7 @@ class UserPortal extends React.Component {
   //   axios.get('/api/check', props.userInfo)
   //    .then(status => this.setState({ adminDisplay: status }));
     axios.get('/api/getAllVotingTopics')
-      .then((response) => console.log(response));
+      .then(({ data }) => console.log(data));
   }
   
   showUserProfile() {
