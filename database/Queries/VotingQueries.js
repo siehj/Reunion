@@ -1,28 +1,26 @@
 const db = require('../index');
 
+let getAllVotingTopics = () => {
+  const query = `SELECT * FROM voting_topics;`;
+  return new Promise ((resolve, reject) => {
+    db.query(query, (err, { rows }) => {
+      if(err) reject(err);
+      else resolve(rows);
+    });
+  });
+};
+
+let getVotingItemsByTopic = (topicID) => {
+  const query = `SELECT * FROM voting_items WHERE topic_id=${topicID};`;
+  return new Promise ((resolve, reject) => {
+    db.query(query, (err, { rows }) => {
+      if(err) reject(err);
+      else resolve(rows);
+    });
+  });
+};
+
 module.exports = {
-  'getAllVotingTopics' : () => {
-    const query = `SELECT * FROM voting_topics;`;
-    return new Promise ((resolve, reject) => {
-      db.query(query, (err, { rows }) => {
-        if(err) reject(err);
-        else resolve(rows);
-      });
-    });
-  },
-  'getVotingItemsByTopic' : (topicID) => {
-    const query = `SELECT * FROM voting_items WHERE topic_id=${topicID};`;
-    // db.query(query, (err, result) => {
-    //   if(err) callback(err, null);
-    //   else callback(null, result);
-    // });
-    return new Promise ((resolve, reject) => {
-      db.query(query, (err, { rows }) => {
-        if(err) reject(err);
-        else resolve(rows);
-      });
-    });
-  },
   'getVoting' : () => {
     return new Promise ((resolve, reject) => {
       getAllVotingTopics()
