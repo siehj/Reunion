@@ -3,22 +3,6 @@ const { Client } = require('pg');
 const client = new Client(process.env.DATABASE_URL + '?ssl=true');
 client.connect();
 
-getUserInfo = (username, callback) => {
-  const query = 'SELECT * FROM users WHERE username=$1;';
-  const params = [username];
-  client.query(query, params, (err, { rows }) => {
-    if(err) callback(err, null);
-    else callback(null, rows);
-  });
-}
-
-const showUsers = (callback) => {
-  const query = 'SELECT * FROM users;';
-  client.query(query, (err, { rows }) => {
-    if(err) callback(err, null);
-    else callback(null, rows);
-  });
-};
 
 const getAllHotelInfo = () => {
   const query = 'SELECT * FROM hotels;';
@@ -26,36 +10,6 @@ const getAllHotelInfo = () => {
     client.query(query, (err, { rows }) => {
       if(err) reject(err);
       else resolve(rows);
-    });
-  });
-};
-
-const updateUser = (id, updatedInfo) => {
-
-  return new Promise ((resolve, reject) => {
-    getWithId(id)
-      .then((currentInfo) => {
-        Object.keys(updatedInfo).forEach(col => {
-          let row = updatedInfo[col];
-          if(currentInfo[col] !== updatedInfo[col]) {
-            let query = `UPDATE users SET ${col}='${row}' WHERE id=${id};`
-            client.query(query, (err, result) => {
-              if(err) reject(err);
-              else resolve(result);
-            });
-          };
-        });
-      })
-      .catch(err => console.log(err));
-  });
-};
-
-const getWithId = (id) => {
-  const query = `SELECT * FROM users WHERE id=${id};`;
-  return new Promise ((resolve, reject) => {
-    client.query(query, (err, info ) => {
-      if(err) reject(err);
-      else resolve(info);
     });
   });
 };

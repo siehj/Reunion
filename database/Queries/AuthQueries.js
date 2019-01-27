@@ -1,4 +1,5 @@
 const db = require('../index.js');
+const profile = require('../Queries/ProfileQueries');
 
 module.exports = {
   'addUser' : (user) => {
@@ -9,7 +10,7 @@ module.exports = {
       db.query(query, params, (err, data) => {
         if (err) reject(err);
         else {
-          getUserInfo(username, (err, data) => {
+          profile.getUserInfo(username, (err, data) => {
             if (err) reject(err);
             else resolve(data);
           })
@@ -34,7 +35,7 @@ module.exports = {
   
       db.query(query, params, (err) => {
         if (err) reject(err);
-        getUserInfo(username, (err, data) => {
+        profile.getUserInfo(username, (err, data) => {
           if (err) reject(err);
           else resolve(data[0]);
         })
