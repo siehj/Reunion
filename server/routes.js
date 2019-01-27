@@ -17,5 +17,9 @@ router.post('/api/searchYelp', yelp.searchYelp);
 // User Profile routes
 router.post('/api/sendUserUpdate', user.updateUser);
 
+// Voting service logic
+router.get('/api/getAllVotingTopics', voting.getVotingTopics);
+router.post('/api/castVote', voting.castVote);
+
 module.exports = router;
 
