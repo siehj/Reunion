@@ -1,8 +1,8 @@
 
 const fake = [
   {
-    Title: 'Bottle Service', 
-    Summary: "Vote for the club you'd like to get bottle service.",
+    title: 'Bottle Service', 
+    summary: "Vote for the club you'd like to get bottle service.",
     options: [
       {
         name: "test 1",
@@ -17,8 +17,8 @@ const fake = [
     ] 
   },
   {
-    Title: 'Dinner', 
-    Summary: "Vote where you'd like to go for dinner on Friday night.",
+    title: 'Dinner', 
+    summary: "Vote where you'd like to go for dinner on Friday night.",
     options: [
       {
         name: "test 3",
@@ -28,8 +28,8 @@ const fake = [
     ] 
   },
   {
-    Title: 'Brunch', 
-    Summary: "Vote where you'd like to get brunch.",
+    title: 'Brunch', 
+    summary: "Vote where you'd like to get brunch.",
     options: [
       {
         name: "test 4",
@@ -44,8 +44,8 @@ const fake = [
     ] 
   },
   {
-    Title: 'Friday night or Saturday night?', 
-    Summary: "Vote if you'd like to go to dinner and club on Friday or Saturday night.",
+    title: 'Friday night or Saturday night?', 
+    summary: "Vote if you'd like to go to dinner and club on Friday or Saturday night.",
     options: { Friday : { votes : 0 }, Saturday : { votes : 0 } } 
   }
 ]
