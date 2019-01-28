@@ -6,7 +6,6 @@ const yelp = require('./Routes/yelp');
 const user = require('./Routes/userProfile');
 const service = require('./Routes/service');
 
-
 // Registration routes
 router.post('/api/login', auth.login);
 router.post('/api/signUp', auth.signup);

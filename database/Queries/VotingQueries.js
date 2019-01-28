@@ -25,13 +25,20 @@ module.exports = {
     return new Promise ((resolve, reject) => {
       getAllVotingTopics()
         .then(topics => {
-          return new Promise((resolve, reject) => {
-            topics.map(topic => {
+          return new Promise((res, rej) => {
+          let length = topics.length;
+          topics.map((topic, idx)=> {
             topic['options'] = [];
               getVotingItemsByTopic(topic.id)
-                .then(items => topic.options = items)
-                .then(() => resolve(topics))
-                .catch(err => reject(err));
+                .then(items => {
+                  if(topic.id !== 4) topic.options = items;
+                  else {
+                    topic['options'] = {};
+                    items.map(option => topic['options'][option.name] = option )
+                  }
+                })
+                .then(() => { if(idx === length - 1) res(topics)})
+                .catch(err => rej(err));
             }) 
           });
         })
