@@ -6,6 +6,24 @@ This application is a passion project to connect multiple generations of Beckley
 
 Historically this family has annually gathered, in the hundreds, in cities across America and as time passes there should be a way for us--cousins--to continue to gather.
 
+## Tech Stack: 
+|    FRONT-END    |  OTHER RESOURCES  |   
+|      :---:      |      :---:        | 
+|      React      |     Axios.js      |   
+|    Reactstrap   |    Socket.io      |                               
+|  Webpack (Babel)|     Yelp Api      |                                
+
+
+|     BACK-END     |
+|      :---:       | 
+|     Node.js      |
+|    Express js    |
+|  Express Router  |
+| Express Sessions |
+|     Bcrypt       |
+|   Body Parser    |
+|   PostgreSQL     |
+
 ## Features:
 ### Accomodation Information
 This includes information about Las Vegas strip, information on various local activities, and Yelp search functionality for any Restaurant, Bar, etc. that you would like details about. Lastly, there is a link to the hotel where reservations are made for this trip.
