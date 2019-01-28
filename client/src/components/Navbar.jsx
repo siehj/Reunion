@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button } from 'reactstrap'
+import NavIcons from './NestedComponents/NavComponents/NavIcons.jsx';
 
 const NavBar = (props) => (
   <div id="Nav">
@@ -15,6 +16,7 @@ const NavBar = (props) => (
           } 
         }
       )}
+      <NavIcons />
       { props.loggedIn ? 
         <Button id="logoutBtn" outline color="secondary" block onClick={props.logout} >Log Out</Button>
         : null }

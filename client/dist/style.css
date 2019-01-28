@@ -240,3 +240,18 @@ h6 {
 .aboutContent p {
   padding-left: 20px;
 }
+
+#icons {
+  display: flex;
+  flex-direction: row;
+  width: 35%;
+}
+
+#icons a {
+  flex-direction: column;
+  width: 50%;
+}
+
+#icons img {
+  height: 40px;
+}
