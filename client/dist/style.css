@@ -223,3 +223,20 @@ h6 {
 .votes {
   margin-top: 8px;
 }
+
+.aboutContent {
+  padding-top: 20px;
+}
+
+.aboutContent section {
+  padding-bottom: 30px;
+}
+
+.aboutContent h4 {
+  color: gray;
+  padding-left: 10px;
+}
+
+.aboutContent p {
+  padding-left: 20px;
+}
