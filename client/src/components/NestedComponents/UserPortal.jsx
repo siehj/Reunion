@@ -2,7 +2,7 @@ import React from 'react';
 import { Button, Alert, Input, Row, Col } from 'reactstrap';
 import VotingComponent from './ProfileComponents/Voting.jsx';
 import Itenerary from './ProfileComponents/Itenerary.jsx';
-import fake from '../../../../database/TemporaryData.js';
+// import fake from '../../../../database/TemporaryData.js';
 import axios from 'axios';
 import Modal from './Modal.jsx';
 
@@ -19,7 +19,7 @@ class UserPortal extends React.Component {
         Saturday: [],
         Sunday: []
       },
-      voting: fake,
+      voting: [],
       miniScreen: 'itenerary',
       modalOpen: false,
       showProfile: false,
@@ -28,7 +28,6 @@ class UserPortal extends React.Component {
       phone: '',
       city: '',
       state: '',
-      loading: true
     };
     this.showUserProfile = this.showUserProfile.bind(this);
     this.updateUser = this.updateUser.bind(this);
