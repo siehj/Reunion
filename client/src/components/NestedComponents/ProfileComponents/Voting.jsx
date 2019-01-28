@@ -21,10 +21,10 @@ const VotingComponent = (props) => {
                     return (
                       <Row className="votingOptions" key={i}>
                         <Col sm="8" md="8" lg="8">
-                          <h5>Name: {op.name}</h5>
-                          <em>Location: <em style={{ color: 'red' }} >{op.location}</em></em>
+                          <h5>{op.name}</h5>
+                          <em style={{ color: 'red' }} >{op.location}</em> 
                         </Col>
-                        <Col sm="2" md="2" lg="2"className="text-center" ><h5>{op.votes}</h5></Col>
+                        <Col sm="2" md="2" lg="2"className="text-center" ><h5 className="votes" >{op.votes}</h5></Col>
                         <Col sm="2" md="2" lg="2"><Button outline color="danger" onClick={() => props.vote(op.id)} >Vote</Button></Col>
                       </Row>
                   
@@ -37,7 +37,7 @@ const VotingComponent = (props) => {
                       return (
                         <Col sm="6" md="6" lg="6" key={j}  >
                           <h5>{op}</h5>
-                          <h5 className="votes" >{topic.options[op].votes}</h5>
+                          <h5>{topic.options[op].votes}</h5>
                         
                           <Button onClick={() => props.vote(topic.options[op].id)} >Vote</Button>
                         </Col>
