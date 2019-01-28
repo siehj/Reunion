@@ -4,13 +4,12 @@ import { Input, Button, Row, Col } from 'reactstrap'
 const VotingComponent = (props) => {
   return (
     <div className="userPortalMiniScreen" >
-      {/* <Input></Input> <Button>Add Location</Button> */}
       {
         props.item.map((topic, idx) => {
          return (
            <div key={idx} className="votingTopic">
-             <h3 className="text-center" >{topic.Title}</h3>
-             <h6 className="text-center" >{topic.Summary}</h6>
+             <h3 className="text-center" >{topic.title}</h3>
+             <h6 className="text-center" >{topic.summary}</h6>
              {
                Array.isArray(topic.options) ? 
                topic.options.map((op, i) => {
@@ -18,10 +17,10 @@ const VotingComponent = (props) => {
                     <Row className="votingOptions" key={i}>
                       <Col sm="8" md="8" lg="8">
                         <h5>Name: {op.name}</h5>
-                        <em>Location: {op.location}</em>
+                        <em>Location: <em style={{ color: 'red' }} >{op.location}</em></em>
                       </Col>
                       <Col sm="2" md="2" lg="2"className="text-center" ><h5>{op.votes}</h5></Col>
-                      <Col sm="2" md="2" lg="2"><Button>Vote</Button></Col>
+                      <Col sm="2" md="2" lg="2"><Button outline color="danger" onClick={() => props.vote(topic.id, op.id)} >Vote</Button></Col>
                     </Row>
                 
                   )
@@ -33,9 +32,9 @@ const VotingComponent = (props) => {
                     return (
                       <Col sm="6" md="6" lg="6" key={j}  >
                         <h5>{op}</h5>
-                        <h5>{topic.options[op].votes}</h5>
+                        <h5 className="votes" >{topic.options[op].votes}</h5>
                       
-                        <Button onClick={() => props.vote(topic.options[op])} >Vote</Button>
+                        <Button onClick={() => props.vote(topic.id, topic.options[op].id)} >Vote</Button>
                       </Col>
                   )
                   })

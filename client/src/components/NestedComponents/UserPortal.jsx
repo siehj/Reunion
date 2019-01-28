@@ -39,7 +39,7 @@ class UserPortal extends React.Component {
   //   axios.get('/api/check', props.userInfo)
   //    .then(status => this.setState({ adminDisplay: status }));
     axios.get('/api/getAllVotingTopics')
-      .then(({ data }) => console.log(data));
+      .then(({ data }) => this.setState({ voting : data }));
   }
   
   showUserProfile() {
@@ -58,9 +58,10 @@ class UserPortal extends React.Component {
     this.setState({ miniScreen : e.target.title });
   }
 
-  castVote(item) {
-    axios.post('/api/castVote', item)
-      .then(() => console.log(complete));
+  castVote(topicId, optionId) {
+    console.log(topicId, optionId);
+    // axios.post('/api/castVote', item)
+    //   .then(() => console.log(complete));
   }
 
   render() {
