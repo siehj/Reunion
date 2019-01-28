@@ -29,7 +29,7 @@ const VotingComponent = (props) => {
                 : 
                 <Row className="votingOptions" className="text-center" >
                 {
-                  Object.keys(topic.options).map((op, j) => {
+                  Object.keys(topic.options).sort((a, b) => a.id - b.id).map((op, j) => {
                     return (
                       <Col sm="6" md="6" lg="6" key={j}  >
                         <h5>{op}</h5>
