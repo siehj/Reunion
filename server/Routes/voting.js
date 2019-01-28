@@ -6,7 +6,12 @@ module.exports = {
       .then(result => res.send(result))
   },
   'castVote' : (req, res) => {
-    console.log(req.body);
-    // console.log(req)
+    db.checkVotes(req.body.optionId, req.body.userId)
+      .then(({ rows })=> {
+        let intent = rows[0].exists === true ? 'remove' : 'add';
+        db.vote(req.body.optionId, req.body.userId, intent)
+          .then(() => res.end());
+      })
+      .catch(err => console.log)
   } 
 };

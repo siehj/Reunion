@@ -10,9 +10,10 @@ const VotingComponent = (props) => {
            <div key={idx} className="votingTopic">
              <h3 className="text-center" >{topic.title}</h3>
              <h6 className="text-center" >{topic.summary}</h6>
+             
              {
                Array.isArray(topic.options) ? 
-               topic.options.map((op, i) => {
+               topic.options.sort((a, b) => a.id - b.id).map((op, i) => {
                   return (
                     <Row className="votingOptions" key={i}>
                       <Col sm="8" md="8" lg="8">

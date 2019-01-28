@@ -20,6 +20,28 @@ let getVotingItemsByTopic = (topicID) => {
   });
 };
 
+let increment = (optionId) => {
+  const query = `UPDATE voting_items SET votes = votes + 1 WHERE id=$1;`;
+  const params = [optionId];
+  return new Promise ((resolve, reject) => {
+    db.query(query, params, (err, rows) => {
+      if (err) reject(err);
+      else resolve(rows);
+    })
+  })
+};
+
+let decrement = (optionId) => {
+  const query = `UPDATE voting_items SET votes = votes - 1 WHERE id=$1;`;
+  const params = [optionId];
+  return new Promise ((resolve, reject) => {
+    db.query(query, params, (err, rows) => {
+      if (err) reject(err);
+      else resolve(rows);
+    })
+  })
+};
+
 module.exports = {
   'getVoting' : () => {
     return new Promise ((resolve, reject) => {
@@ -47,14 +69,33 @@ module.exports = {
     })
   },
   // User story, a user can vote for any ONE option within a given Topic. 
-  'vote' : () => {},
+  'vote' : (optionId, userId, purpose) => {
+    let query;
+    if (purpose === 'add') query = `INSERT INTO users_voting (item_id, user_id) VALUES ($1, $2);`;
+    else query = `DELETE FROM users_voting WHERE item_id=$1 AND user_id=$2;`;
+    const params = [optionId, userId];
+    return new Promise((resolve, reject) => {
+      db.query(query, params, (err, result) => {
+        if (err) reject(err);
+        else {
+          if (purpose === 'add') {
+            increment(optionId)
+              .then(() => resolve('added'));
+          } else {
+            decrement(optionId)
+              .then(() => resolve('deleted'));
+          }
+        }
+      });
+    });
+  },
 
-  // Checks a user's voting eligibility by checking the users_voting table to see if the userId is there
-  'checkVotes' : (userId) => {
-    const query = 'SELECT EXISTS (SELECT 1 FROM users_voting WHERE user_id=$1);';
-    const params = [userId];
+  // Checks if user voted for this option or not
+  'checkVotes' : (optionId, userId) => {
+    const query = 'SELECT EXISTS (SELECT 1 FROM users_voting WHERE item_id=$1 AND user_id=$2);';
+    const params = [optionId, userId];
     return new Promise ((resolve, reject) => {
-      db.query(query, (err, result) => {
+      db.query(query, params, (err, result) => {
         if(err) reject(err);
         else resolve(result);
       });
