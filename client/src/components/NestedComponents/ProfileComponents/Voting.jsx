@@ -20,7 +20,7 @@ const VotingComponent = (props) => {
                         <em>Location: <em style={{ color: 'red' }} >{op.location}</em></em>
                       </Col>
                       <Col sm="2" md="2" lg="2"className="text-center" ><h5>{op.votes}</h5></Col>
-                      <Col sm="2" md="2" lg="2"><Button outline color="danger" onClick={() => props.vote(topic.id, op.id)} >Vote</Button></Col>
+                      <Col sm="2" md="2" lg="2"><Button outline color="danger" onClick={() => props.vote(op.id)} >Vote</Button></Col>
                     </Row>
                 
                   )
@@ -34,7 +34,7 @@ const VotingComponent = (props) => {
                         <h5>{op}</h5>
                         <h5 className="votes" >{topic.options[op].votes}</h5>
                       
-                        <Button onClick={() => props.vote(topic.id, topic.options[op].id)} >Vote</Button>
+                        <Button onClick={() => props.vote(topic.options[op].id)} >Vote</Button>
                       </Col>
                   )
                   })

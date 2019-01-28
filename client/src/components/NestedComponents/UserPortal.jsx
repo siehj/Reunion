@@ -27,17 +27,23 @@ class UserPortal extends React.Component {
       email: '',
       phone: '',
       city: '',
-      state: ''
+      state: '',
+      loading: true
     };
     this.showUserProfile = this.showUserProfile.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.send = this.send.bind(this);
     this.changeScreen = this.changeScreen.bind(this);
     this.castVote = this.castVote.bind(this);
+    this.getVotingData = this.getVotingData.bind(this);
   }
   componentDidMount() {
   //   axios.get('/api/check', props.userInfo)
   //    .then(status => this.setState({ adminDisplay: status }));
+    this.getVotingData()
+  }
+
+  getVotingData() {
     axios.get('/api/getAllVotingTopics')
       .then(({ data }) => this.setState({ voting : data }));
   }
@@ -58,10 +64,10 @@ class UserPortal extends React.Component {
     this.setState({ miniScreen : e.target.title });
   }
 
-  castVote(topicId, optionId) {
-    console.log(topicId, optionId);
-    // axios.post('/api/castVote', item)
-    //   .then(() => console.log(complete));
+  castVote(optionId) {
+    let userId = this.props.userInfo.id;
+    axios.post('/api/castVote', { optionId, userId })
+      .then(() => this.getVotingData());
   }
 
   render() {

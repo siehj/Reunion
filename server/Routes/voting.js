@@ -6,6 +6,7 @@ module.exports = {
       .then(result => res.send(result))
   },
   'castVote' : (req, res) => {
-
+    console.log(req.body);
+    // console.log(req)
   } 
 };
